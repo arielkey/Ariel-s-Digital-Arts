@@ -73,6 +73,35 @@ Category filters (Apparel/Puzzles/Prints) are guessed from each Printful
 product's name — see `guessCategory()` in `src/lib/printful.ts` if you want
 to refine the matching.
 
+**Status:** Printful catalog and Stripe checkout (test mode) are both
+connected and verified working — the tip jar creates a real Stripe Checkout
+session, and the webhook was verified with the Stripe CLI (`stripe trigger
+checkout.session.completed`), returning 200 with no errors. Still to do
+before real sales: switch `STRIPE_SECRET_KEY` to the live key, and add a
+permanent webhook endpoint in the Stripe dashboard once deployed (see below).
+
+### Testing checkout locally with the Stripe CLI
+
+A portable `stripe.exe` is set up at `C:\Users\execu\bin\stripe.exe`
+(not a system install, so nothing to uninstall — just delete the file/folder
+if you want it gone). To test the fulfillment webhook locally:
+
+```bash
+stripe listen --forward-to localhost:3000/api/webhooks/stripe --api-key sk_test_...
+```
+
+This prints a `whsec_...` signing secret — put that in `.env.local` as
+`STRIPE_WEBHOOK_SECRET` (only while testing locally). In another terminal:
+
+```bash
+stripe trigger checkout.session.completed --api-key sk_test_...
+```
+
+This fires a synthetic event so you can watch the webhook route respond
+without needing a real completed purchase. Note the CLI's webhook secret is
+temporary and local-only — it's unrelated to the permanent one you'll get
+from a real webhook endpoint in the Stripe dashboard once deployed.
+
 ## Roadmap (built one section at a time)
 
 1. ✅ Project scaffold + homepage (hero, brand intro, featured items, tip jar, newsletter banner)
