@@ -37,20 +37,26 @@ src/
   app/
     page.tsx           Homepage
     shop/               Shop (Printful items) — live catalog + category filters
-    gallery/            Gallery (original art) — stub, built out next
+    gallery/            Gallery (original art) — live Supabase listings + buy/inquire
     about/               About — stub, built out next
     contact/             Contact — stub, built out next
     api/
       checkout/tip/      Stripe Checkout session for the tip jar
       checkout/product/  Stripe Checkout session for a shop item
-      webhooks/stripe/   On payment, places the matching Printful fulfillment order
+      checkout/art/      Stripe Checkout session for an original art piece
+      webhooks/stripe/   On payment: places the Printful fulfillment order, or
+                         marks the matching art piece "sold" in Supabase
       newsletter/        ConvertKit signup proxy
-  components/            Header, Footer, Hero, ProductCard, BuyButton, ShopGrid, etc.
+  components/            Header, Footer, Hero, ProductCard, ArtCard, BuyButton, ShopGrid, etc.
   lib/
     types.ts             Shared Product / ArtPiece types
     placeholder-data.ts  Sample data used until Printful/Supabase are live
     printful.ts          Printful API client (catalog + order creation)
+    gallery.ts           Supabase art gallery reads
+    supabase.ts          Supabase clients (anon read + service-role admin)
     stripe.ts            Server-side Stripe client
+supabase/
+  schema.sql             Run once in the Supabase SQL Editor to create art_pieces
 ```
 
 ### Going live with the shop
@@ -73,12 +79,36 @@ Category filters (Apparel/Puzzles/Prints) are guessed from each Printful
 product's name — see `guessCategory()` in `src/lib/printful.ts` if you want
 to refine the matching.
 
-**Status:** Printful catalog and Stripe checkout (test mode) are both
-connected and verified working — the tip jar creates a real Stripe Checkout
-session, and the webhook was verified with the Stripe CLI (`stripe trigger
-checkout.session.completed`), returning 200 with no errors. Still to do
-before real sales: switch `STRIPE_SECRET_KEY` to the live key, and add a
-permanent webhook endpoint in the Stripe dashboard once deployed (see below).
+**Status:** Printful catalog and Stripe checkout are both connected. The
+checkout flow and the fulfillment webhook were verified in test mode (tip
+jar created a real Checkout session; the webhook was verified with the
+Stripe CLI, returning 200 with no errors). `STRIPE_SECRET_KEY` has since
+been switched to the **live** key — real charges are possible from this
+point on. Still to do: add a permanent live-mode webhook endpoint in the
+Stripe dashboard once deployed (see below) — until then, successful
+payments won't automatically trigger Printful fulfillment or mark art
+pieces sold, since there's no public URL yet for Stripe to send the event to.
+
+### Going live with the gallery
+
+The Gallery page works today with sample data. To connect real pieces:
+
+1. Create a Supabase project, then run [`supabase/schema.sql`](supabase/schema.sql)
+   once in its SQL Editor to create the `art_pieces` table.
+2. Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` to
+   `.env.local` (Supabase dashboard → Settings → API) — the gallery will
+   automatically switch from sample pieces to your live listings.
+3. Add `SUPABASE_SERVICE_ROLE_KEY` too — the checkout webhook needs it to
+   mark a piece "sold" after it's purchased (this key bypasses Row Level
+   Security, so keep it server-side only, never in client code).
+4. To add, edit, or remove pieces day-to-day, use Supabase's **Table Editor**
+   (Dashboard → Table Editor → `art_pieces`) — no code changes needed.
+   Uploading images: Supabase Storage works well for this (Dashboard →
+   Storage → create a public bucket, upload the image, copy its public URL
+   into the piece's `image` field).
+5. Set a piece's `status` to `available` (with a `price`) for a Buy button,
+   `inquire` for an "Inquire" link to the Contact page, or `sold` to disable
+   both.
 
 ### Testing checkout locally with the Stripe CLI
 
@@ -106,7 +136,7 @@ from a real webhook endpoint in the Stripe dashboard once deployed.
 
 1. ✅ Project scaffold + homepage (hero, brand intro, featured items, tip jar, newsletter banner)
 2. ✅ Shop page — live Printful catalog, category filters, Stripe checkout, auto-fulfillment webhook
-3. Gallery page — Supabase-backed original art listings, buy/inquire flow
+3. ✅ Gallery page — Supabase-backed original art listings, buy/inquire flow
 4. About page — brand story
 5. Contact page — form + email delivery
 6. Polish, SEO, analytics, deploy to Vercel

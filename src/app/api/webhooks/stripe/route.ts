@@ -2,11 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { createPrintfulOrder } from "@/lib/printful";
+import { supabaseAdmin } from "@/lib/supabase";
 
 /**
  * Stripe webhook — on a completed shop checkout, places the matching order
- * with Printful so it enters fulfillment automatically. Configure this URL
- * (https://yourdomain.com/api/webhooks/stripe) in the Stripe dashboard,
+ * with Printful so it enters fulfillment automatically; on a completed
+ * original-art checkout, marks that piece "sold" in Supabase. Configure this
+ * URL (https://yourdomain.com/api/webhooks/stripe) in the Stripe dashboard,
  * subscribed to checkout.session.completed, and set STRIPE_WEBHOOK_SECRET.
  *
  * Fulfillment is attempted once; a failure is logged rather than retried,
@@ -53,6 +55,17 @@ export async function POST(req: NextRequest) {
         }
       } else {
         console.error("Checkout session missing shipping details", session.id);
+      }
+    }
+
+    const artPieceId = session.metadata?.artPieceId;
+    if (artPieceId && supabaseAdmin) {
+      const { error } = await supabaseAdmin
+        .from("art_pieces")
+        .update({ status: "sold" })
+        .eq("id", artPieceId);
+      if (error) {
+        console.error("Failed to mark art piece sold", artPieceId, error.message);
       }
     }
   }

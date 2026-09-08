@@ -3,9 +3,15 @@ import Hero from "@/components/Hero";
 import ColoringPageBanner from "@/components/ColoringPageBanner";
 import ProductCard from "@/components/ProductCard";
 import ArtCard from "@/components/ArtCard";
-import { featuredArt, featuredProducts } from "@/lib/placeholder-data";
+import { getArtPieces } from "@/lib/gallery";
+import { getPrintfulProducts } from "@/lib/printful";
+import { featuredArt as placeholderArt, featuredProducts as placeholderProducts } from "@/lib/placeholder-data";
 
-export default function Home() {
+export default async function Home() {
+  const [liveArt, liveProducts] = await Promise.all([getArtPieces(), getPrintfulProducts()]);
+  const featuredArt = (liveArt ?? placeholderArt).slice(0, 2);
+  const featuredProducts = (liveProducts ?? placeholderProducts).slice(0, 3);
+
   return (
     <>
       <Hero />

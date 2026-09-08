@@ -3,11 +3,13 @@
 import { useState } from "react";
 
 export default function BuyButton({
-  productId,
+  endpoint,
+  payload,
   variant = "sage",
   label = "Buy",
 }: {
-  productId: string;
+  endpoint: string;
+  payload: Record<string, string>;
   variant?: "sage" | "gold";
   label?: string;
 }) {
@@ -18,10 +20,10 @@ export default function BuyButton({
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/checkout/product", {
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId }),
+        body: JSON.stringify(payload),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Something went wrong.");

@@ -1,14 +1,27 @@
+import Image from "next/image";
 import Link from "next/link";
 import PlaceholderArt from "./PlaceholderArt";
+import BuyButton from "./BuyButton";
 import type { ArtPiece } from "@/lib/types";
 
 export default function ArtCard({ art }: { art: ArtPiece }) {
-  const showInquire = art.status === "inquire" || art.status === "sold";
+  const canBuy = art.status === "available" && !!art.price;
+  const canInquire = art.status === "inquire";
 
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl border border-gold-200/60 bg-white transition-shadow hover:shadow-lg">
-      <div className="aspect-[4/5] w-full overflow-hidden">
-        <PlaceholderArt label={art.title} className="h-full w-full" />
+      <div className="relative aspect-[4/5] w-full overflow-hidden">
+        {art.image ? (
+          <Image
+            src={art.image}
+            alt={art.title}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover"
+          />
+        ) : (
+          <PlaceholderArt label={art.title} className="h-full w-full" />
+        )}
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
         <h3 className="font-display text-base text-ink-900">{art.title}</h3>
@@ -23,16 +36,24 @@ export default function ArtCard({ art }: { art: ArtPiece }) {
                 ? `$${art.price.toFixed(2)}`
                 : "Inquire for price"}
           </span>
-          <Link
-            href={art.href}
-            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-              art.status === "sold"
-                ? "pointer-events-none bg-sage-100 text-sage-400"
-                : "bg-gold-400 text-ink-900 hover:bg-gold-300"
-            }`}
-          >
-            {showInquire ? "Inquire" : "Buy"}
-          </Link>
+          {canBuy ? (
+            <BuyButton
+              endpoint="/api/checkout/art"
+              payload={{ pieceId: art.id }}
+              variant="gold"
+            />
+          ) : canInquire ? (
+            <Link
+              href={`/contact?piece=${encodeURIComponent(art.id)}`}
+              className="rounded-full bg-gold-400 px-4 py-1.5 text-sm font-medium text-ink-900 transition-colors hover:bg-gold-300"
+            >
+              Inquire
+            </Link>
+          ) : (
+            <span className="rounded-full bg-sage-100 px-4 py-1.5 text-sm font-medium text-sage-400">
+              Sold
+            </span>
+          )}
         </div>
       </div>
     </div>

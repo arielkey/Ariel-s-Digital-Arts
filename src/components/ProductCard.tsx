@@ -28,7 +28,11 @@ export default function ProductCard({ product }: { product: ShopProduct }) {
           <span className="text-sm font-medium text-foreground/80">
             ${product.price.toFixed(2)}
           </span>
-          <BuyButton productId={product.id} variant="sage" />
+          <BuyButton
+            endpoint="/api/checkout/product"
+            payload={{ productId: product.id }}
+            variant="sage"
+          />
         </div>
       </div>
     </div>
