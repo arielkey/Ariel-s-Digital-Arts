@@ -20,9 +20,6 @@ export const metadata: Metadata = {
   title: "Ariel's Digital Arts",
   description:
     "Original fantasy art, prints, and apparel from Ariel's Digital Arts.",
-  icons: {
-    icon: "/favicon.ico",
-  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

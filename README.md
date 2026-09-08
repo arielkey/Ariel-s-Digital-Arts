@@ -23,11 +23,9 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Assets to drop in before launch
 
-- `public/logo.svg` (or `.png`) — the real circular badge logo. Until then,
-  [`src/components/Logo.tsx`](src/components/Logo.tsx) renders a placeholder
-  badge in the brand colors.
-- `public/favicon.ico` — replace the default Next.js favicon with one
-  generated from the real logo.
+- ✅ `public/logo.png` — real badge logo in place, used by
+  [`src/components/Logo.tsx`](src/components/Logo.tsx). `src/app/favicon.ico`,
+  `icon.png`, and `apple-icon.png` were generated from it.
 - `public/hero.jpg` — the fantasy/dragon hero art. Until then,
   [`src/components/Hero.tsx`](src/components/Hero.tsx) uses a gradient
   placeholder background; swap in a `background-image` once the file exists
