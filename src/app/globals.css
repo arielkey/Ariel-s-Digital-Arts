@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+:root {
+  /* Neutral light background + warm ink text */
+  --background: #FAF7F0;
+  --foreground: #2A2620;
+
+  /* Sage green scale */
+  --color-sage-50: #F3F6F0;
+  --color-sage-100: #E4EBDC;
+  --color-sage-200: #CBD9BC;
+  --color-sage-300: #AAC095;
+  --color-sage-400: #8AA773;
+  --color-sage-500: #6E8D57;
+  --color-sage-600: #567043;
+  --color-sage-700: #445837;
+  --color-sage-800: #37452D;
+  --color-sage-900: #2C3725;
+
+  /* Gold / cream scale */
+  --color-gold-50: #FBF6E8;
+  --color-gold-100: #F5E9C7;
+  --color-gold-200: #EAD79A;
+  --color-gold-300: #DEC06B;
+  --color-gold-400: #D1A947;
+  --color-gold-500: #BE9236;
+  --color-gold-600: #9C7529;
+  --color-gold-700: #7A5A21;
+  --color-gold-800: #5A421A;
+  --color-gold-900: #3C2C13;
+
+  /* Cream neutrals */
+  --color-cream-50: #FFFEFB;
+  --color-cream-100: #FAF7F0;
+  --color-cream-200: #F3EDE0;
+  --color-cream-300: #E9DFC9;
+
+  /* Deep ink for dark-fantasy contrast panels */
+  --color-ink-900: #1B1D16;
+  --color-ink-800: #262920;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-sage-50: var(--color-sage-50);
+  --color-sage-100: var(--color-sage-100);
+  --color-sage-200: var(--color-sage-200);
+  --color-sage-300: var(--color-sage-300);
+  --color-sage-400: var(--color-sage-400);
+  --color-sage-500: var(--color-sage-500);
+  --color-sage-600: var(--color-sage-600);
+  --color-sage-700: var(--color-sage-700);
+  --color-sage-800: var(--color-sage-800);
+  --color-sage-900: var(--color-sage-900);
+
+  --color-gold-50: var(--color-gold-50);
+  --color-gold-100: var(--color-gold-100);
+  --color-gold-200: var(--color-gold-200);
+  --color-gold-300: var(--color-gold-300);
+  --color-gold-400: var(--color-gold-400);
+  --color-gold-500: var(--color-gold-500);
+  --color-gold-600: var(--color-gold-600);
+  --color-gold-700: var(--color-gold-700);
+  --color-gold-800: var(--color-gold-800);
+  --color-gold-900: var(--color-gold-900);
+
+  --color-cream-50: var(--color-cream-50);
+  --color-cream-100: var(--color-cream-100);
+  --color-cream-200: var(--color-cream-200);
+  --color-cream-300: var(--color-cream-300);
+
+  --color-ink-900: var(--color-ink-900);
+  --color-ink-800: var(--color-ink-800);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
