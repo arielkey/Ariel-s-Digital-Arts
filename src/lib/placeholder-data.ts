@@ -35,6 +35,29 @@ export const featuredProducts: ShopProduct[] = [
   },
 ];
 
+/** Fuller sample catalog for the Shop page's category filters, until Printful is live. */
+export const shopProducts: ShopProduct[] = [
+  ...featuredProducts,
+  {
+    id: "hoodie-emberwing",
+    title: "Emberwing Hoodie",
+    price: 44,
+    currency: "USD",
+    image: "",
+    category: "apparel",
+    href: "/shop",
+  },
+  {
+    id: "print-quillkeeper",
+    title: "The Quillkeeper Art Print",
+    price: 22,
+    currency: "USD",
+    image: "",
+    category: "prints",
+    href: "/shop",
+  },
+];
+
 export const featuredArt: ArtPiece[] = [
   {
     id: "art-the-quillkeeper",

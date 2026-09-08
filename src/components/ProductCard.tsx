@@ -1,12 +1,23 @@
-import Link from "next/link";
+import Image from "next/image";
 import PlaceholderArt from "./PlaceholderArt";
+import BuyButton from "./BuyButton";
 import type { ShopProduct } from "@/lib/types";
 
 export default function ProductCard({ product }: { product: ShopProduct }) {
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl border border-sage-200/60 bg-white transition-shadow hover:shadow-lg">
-      <div className="aspect-square w-full overflow-hidden">
-        <PlaceholderArt label={product.title} className="h-full w-full" />
+      <div className="relative aspect-square w-full overflow-hidden">
+        {product.image ? (
+          <Image
+            src={product.image}
+            alt={product.title}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover"
+          />
+        ) : (
+          <PlaceholderArt label={product.title} className="h-full w-full" />
+        )}
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
         <span className="text-xs uppercase tracking-widest text-sage-600">
@@ -17,12 +28,7 @@ export default function ProductCard({ product }: { product: ShopProduct }) {
           <span className="text-sm font-medium text-foreground/80">
             ${product.price.toFixed(2)}
           </span>
-          <Link
-            href={product.href}
-            className="rounded-full bg-sage-600 px-4 py-1.5 text-sm font-medium text-cream-50 transition-colors hover:bg-sage-700"
-          >
-            Buy
-          </Link>
+          <BuyButton productId={product.id} variant="sage" />
         </div>
       </div>
     </div>

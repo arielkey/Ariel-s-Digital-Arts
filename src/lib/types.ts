@@ -1,4 +1,4 @@
-export type ProductCategory = "apparel" | "puzzles" | "prints";
+export type ProductCategory = "apparel" | "puzzles" | "prints" | "other";
 
 /** A print-on-demand item fulfilled through Printful. */
 export interface ShopProduct {
@@ -8,7 +8,8 @@ export interface ShopProduct {
   currency: string;
   image: string;
   category: ProductCategory;
-  printfulVariantId?: string;
+  /** Printful sync variant id — the authoritative id used to place fulfillment orders. */
+  printfulVariantId?: number;
   href: string;
 }
 

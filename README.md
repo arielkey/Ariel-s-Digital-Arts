@@ -36,29 +36,51 @@ Open [http://localhost:3000](http://localhost:3000).
 src/
   app/
     page.tsx           Homepage
-    shop/               Shop (Printful items) — stub, built out next
+    shop/               Shop (Printful items) — live catalog + category filters
     gallery/            Gallery (original art) — stub, built out next
     about/               About — stub, built out next
     contact/             Contact — stub, built out next
     api/
       checkout/tip/      Stripe Checkout session for the tip jar
+      checkout/product/  Stripe Checkout session for a shop item
+      webhooks/stripe/   On payment, places the matching Printful fulfillment order
       newsletter/        ConvertKit signup proxy
-  components/            Header, Footer, Hero, ProductCard, ArtCard, etc.
+  components/            Header, Footer, Hero, ProductCard, BuyButton, ShopGrid, etc.
   lib/
     types.ts             Shared Product / ArtPiece types
-    placeholder-data.ts  Sample data for homepage until Printful/Supabase are live
+    placeholder-data.ts  Sample data used until Printful/Supabase are live
+    printful.ts          Printful API client (catalog + order creation)
     stripe.ts            Server-side Stripe client
 ```
+
+### Going live with the shop
+
+The Shop page and checkout work today with sample data. To connect the real
+store:
+
+1. Add `PRINTFUL_API_KEY` (and `PRINTFUL_STORE_ID` if your token spans
+   multiple stores) to `.env.local` — the shop page will automatically
+   switch from sample items to your live Printful catalog.
+2. Add `STRIPE_SECRET_KEY` so the Buy button can create real Checkout
+   sessions.
+3. In the Stripe dashboard, add a webhook endpoint at
+   `https://yourdomain.com/api/webhooks/stripe` subscribed to
+   `checkout.session.completed`, and add its signing secret as
+   `STRIPE_WEBHOOK_SECRET`. This is what triggers the Printful order
+   automatically after a successful payment.
+
+Category filters (Apparel/Puzzles/Prints) are guessed from each Printful
+product's name — see `guessCategory()` in `src/lib/printful.ts` if you want
+to refine the matching.
 
 ## Roadmap (built one section at a time)
 
 1. ✅ Project scaffold + homepage (hero, brand intro, featured items, tip jar, newsletter banner)
-2. Shop page — live Printful catalog, category filters, Stripe checkout
+2. ✅ Shop page — live Printful catalog, category filters, Stripe checkout, auto-fulfillment webhook
 3. Gallery page — Supabase-backed original art listings, buy/inquire flow
 4. About page — brand story
 5. Contact page — form + email delivery
-6. Printful → Stripe order fulfillment webhook
-7. Polish, SEO, analytics, deploy to Vercel
+6. Polish, SEO, analytics, deploy to Vercel
 
 ## Deploying
 
