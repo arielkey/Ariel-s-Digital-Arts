@@ -26,10 +26,9 @@ Open [http://localhost:3000](http://localhost:3000).
 - ✅ `public/logo.png` — real badge logo in place, used by
   [`src/components/Logo.tsx`](src/components/Logo.tsx). `src/app/favicon.ico`,
   `icon.png`, and `apple-icon.png` were generated from it.
-- `public/hero.jpg` — the fantasy/dragon hero art. Until then,
-  [`src/components/Hero.tsx`](src/components/Hero.tsx) uses a gradient
-  placeholder background; swap in a `background-image` once the file exists
-  (instructions in a comment at the top of that file).
+- ✅ `public/hero.jpg` — real hero art (green dragon eye) in place, used by
+  [`src/components/Hero.tsx`](src/components/Hero.tsx) as a full-bleed
+  background with a left-to-right dark gradient for text contrast.
 
 ## Project structure
 
