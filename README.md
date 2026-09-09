@@ -177,9 +177,11 @@ from a real webhook endpoint in the Stripe dashboard once deployed.
 
 ## Deploying
 
-**Live at [ariel-s-digital-arts.vercel.app](https://ariel-s-digital-arts.vercel.app)**,
-deployed via Vercel's GitHub integration (auto-deploys on every push to
-`main`). Production has `STRIPE_SECRET_KEY` (live), `STRIPE_WEBHOOK_SECRET`,
+**Live at [arielsdigitalarts.com](https://arielsdigitalarts.com)** (custom
+domain purchased and connected through Vercel; the original
+[ariel-s-digital-arts.vercel.app](https://ariel-s-digital-arts.vercel.app)
+URL still works too), deployed via Vercel's GitHub integration (auto-deploys
+on every push to `main`). Production has `STRIPE_SECRET_KEY` (live), `STRIPE_WEBHOOK_SECRET`,
 `PRINTFUL_API_KEY`, `PRINTFUL_STORE_ID`, `RESEND_API_KEY`, and
 `CONTACT_TO_EMAIL` set in Vercel's Environment Variables — **the live Stripe
 key is active, so checkout processes real payments**, and the contact form
