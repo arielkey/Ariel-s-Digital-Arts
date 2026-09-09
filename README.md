@@ -9,7 +9,7 @@ art, prints, apparel, and puzzles.
 - **Stripe** — checkout for shop items + tip jar
 - **Printful** — POD product catalog + order fulfillment
 - **Supabase** — original art gallery listings
-- **ConvertKit** — email list / free coloring page opt-in
+- **Kit** (formerly ConvertKit) — email list / free coloring page opt-in
 - **Resend** — contact form email delivery
 
 ## Getting started
@@ -47,7 +47,7 @@ src/
       checkout/art/      Stripe Checkout session for an original art piece
       webhooks/stripe/   On payment: places the Printful fulfillment order, or
                          marks the matching art piece "sold" in Supabase
-      newsletter/        ConvertKit signup proxy
+      newsletter/        Kit (formerly ConvertKit) signup proxy
       contact/           Sends contact form submissions via Resend
   components/            Header, Footer, Hero, ProductCard, ArtCard, BuyButton, ShopGrid,
                          ContactForm, etc.
@@ -78,7 +78,7 @@ store:
    `STRIPE_WEBHOOK_SECRET`. This is what triggers the Printful order
    automatically after a successful payment.
 
-Category filters (Apparel/Puzzles/Prints) are guessed from each Printful
+Category filters (Apparel/Puzzles/Prints/Mats) are guessed from each Printful
 product's name — see `guessCategory()` in `src/lib/printful.ts` if you want
 to refine the matching.
 
@@ -132,6 +132,25 @@ it's wired up:
 
 Replying to a contact email goes straight back to the sender — the route
 sets `reply_to` to their address automatically.
+
+### Going live with the newsletter (Kit)
+
+The footer and homepage coloring-page signup forms both post to
+`/api/newsletter`, which shows a friendly "not connected yet" error until
+Kit is wired up:
+
+1. In your Kit account, go to **Settings → Developer** and create a **V4 API
+   Key**.
+2. Find the **Form ID** for the form you want signups added to — Kit's
+   dashboard shows this when you open a specific form (or list forms via the
+   API: `GET https://api.kit.com/v4/forms` with the `X-Kit-Api-Key` header).
+3. Add `KIT_API_KEY` and `KIT_FORM_ID` to `.env.local` (and Vercel's
+   Environment Variables once ready).
+
+Note: this project was originally scaffolded against ConvertKit's older v3
+API. Kit's v3 is deprecated (still works for now, but scheduled to be
+sunset), so `src/app/api/newsletter/route.ts` uses the current v4 API
+(`X-Kit-Api-Key` header, `POST /v4/forms/{id}/subscribers`) instead.
 
 ### Testing checkout locally with the Stripe CLI
 
@@ -187,7 +206,7 @@ on every push to `main`). Production has `STRIPE_SECRET_KEY` (live), `STRIPE_WEB
 key is active, so checkout processes real payments**, and the contact form
 sends real emails (verified end-to-end in production: a live POST to
 `/api/contact` returned `200` and the test message was received). Supabase
-and ConvertKit variables aren't set yet, so Gallery and the newsletter forms
+and Kit variables aren't set yet, so Gallery and the newsletter forms
 still run on placeholder/disabled behavior in production too. A live-mode
 Stripe webhook is configured pointing at `/api/webhooks/stripe`, verified
 reachable (returns 400 on an unsigned request, confirming the route and

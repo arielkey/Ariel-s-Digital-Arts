@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 /**
- * Email capture UI. Wires to /api/newsletter, which will call ConvertKit
- * once CONVERTKIT_API_KEY / CONVERTKIT_FORM_ID are set (see .env.example).
+ * Email capture UI. Wires to /api/newsletter, which will call Kit (formerly
+ * ConvertKit) once KIT_API_KEY / KIT_FORM_ID are set (see .env.example).
  */
 export default function NewsletterForm({
   variant = "footer",

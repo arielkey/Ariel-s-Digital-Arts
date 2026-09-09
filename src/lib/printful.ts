@@ -21,13 +21,14 @@ export function isPrintfulConfigured() {
 
 /**
  * Best-effort category guess from the product name, since Printful sync
- * products don't carry our Apparel/Puzzles/Prints taxonomy directly.
+ * products don't carry our Apparel/Puzzles/Prints/Mats taxonomy directly.
  * Override by renaming products in Printful, or extend this list.
  */
 function guessCategory(name: string): ProductCategory {
   const n = name.toLowerCase();
   if (/(puzzle|jigsaw)/.test(n)) return "puzzles";
   if (/(shirt|tee|hoodie|sweatshirt|tank|apparel|crewneck)/.test(n)) return "apparel";
+  if (/(desk mat|playmat|play mat|mousepad|mouse pad|\bmats?\b)/.test(n)) return "mats";
   if (/(print|poster|canvas|art)/.test(n)) return "prints";
   return "other";
 }

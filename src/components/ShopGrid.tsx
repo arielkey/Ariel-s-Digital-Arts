@@ -8,10 +8,11 @@ const CATEGORY_LABELS: Record<ProductCategory, string> = {
   apparel: "Apparel",
   puzzles: "Puzzles",
   prints: "Prints",
+  mats: "Mats",
   other: "Other",
 };
 
-const CATEGORY_ORDER: ProductCategory[] = ["apparel", "puzzles", "prints", "other"];
+const CATEGORY_ORDER: ProductCategory[] = ["apparel", "puzzles", "prints", "mats", "other"];
 
 export default function ShopGrid({ products }: { products: ShopProduct[] }) {
   const [active, setActive] = useState<ProductCategory | "all">("all");

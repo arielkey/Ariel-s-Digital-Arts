@@ -1,4 +1,4 @@
-export type ProductCategory = "apparel" | "puzzles" | "prints" | "other";
+export type ProductCategory = "apparel" | "puzzles" | "prints" | "mats" | "other";
 
 /** A print-on-demand item fulfilled through Printful. */
 export interface ShopProduct {
