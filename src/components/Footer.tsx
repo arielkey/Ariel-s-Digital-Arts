@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Mail } from "lucide-react";
 import Logo from "./Logo";
 import NewsletterForm from "./NewsletterForm";
 
@@ -12,10 +13,10 @@ function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
+function TikTokIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
-      <path d="M15 3h-2a5 5 0 0 0-5 5v2H6v4h2v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3z" />
+    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" {...props}>
+      <path d="M16.6 5.82c-.9-.78-1.44-1.9-1.5-3.14h-3.02v13.44a2.6 2.6 0 1 1-1.86-2.5v-3.1a5.6 5.6 0 1 0 4.88 5.56V9.4a6.9 6.9 0 0 0 4.1 1.34V7.72a3.9 3.9 0 0 1-2.6-1.9z" />
     </svg>
   );
 }
@@ -34,9 +35,16 @@ export default function Footer() {
           <p className="text-sm text-cream-100/70">
             Original fantasy art, prints, and apparel — hand-drawn stories brought to life.
           </p>
+          <a
+            href="mailto:executiveorganizeak@gmail.com"
+            className="flex items-center gap-2 text-sm text-cream-100/70 transition-colors hover:text-gold-300"
+          >
+            <Mail className="h-4 w-4" />
+            executiveorganizeak@gmail.com
+          </a>
           <div className="flex gap-4 pt-1">
             <a
-              href="https://instagram.com"
+              href="https://instagram.com/arielsdigitalarts"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -45,13 +53,13 @@ export default function Footer() {
               <InstagramIcon className="h-5 w-5" />
             </a>
             <a
-              href="https://facebook.com"
+              href="https://tiktok.com/@arielsdigitalarts"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Facebook"
+              aria-label="TikTok"
               className="text-cream-100/70 transition-colors hover:text-gold-300"
             >
-              <FacebookIcon className="h-5 w-5" />
+              <TikTokIcon className="h-5 w-5" />
             </a>
           </div>
         </div>

@@ -22,7 +22,14 @@ export default async function ContactPage({
       <p className="mt-3 text-foreground/70">
         Questions about an order, interested in a gallery piece, or want to
         commission something custom? Send a message and I&apos;ll get back to
-        you soon.
+        you soon — or email me directly at{" "}
+        <a
+          href="mailto:executiveorganizeak@gmail.com"
+          className="font-medium text-sage-700 underline hover:text-sage-800"
+        >
+          executiveorganizeak@gmail.com
+        </a>
+        .
       </p>
 
       <div className="mt-10">
