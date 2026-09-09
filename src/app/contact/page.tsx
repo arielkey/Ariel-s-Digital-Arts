@@ -51,6 +51,17 @@ export default function ContactPage() {
         </a>{" "}
         section instead.
       </p>
+
+      <p className="mt-2 text-sm text-foreground/60">
+        Have feedback, a suggestion, or a complaint?{" "}
+        <a
+          href="/about?reason=Comment+%2F+Suggestion+%2F+Complaint#commissions"
+          className="font-medium text-sage-700 underline hover:text-sage-800"
+        >
+          Let me know here
+        </a>
+        .
+      </p>
     </section>
   );
 }

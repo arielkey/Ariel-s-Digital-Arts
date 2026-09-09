@@ -10,10 +10,12 @@ const REASONS = [
   "Other",
 ];
 
-export default function CommissionForm() {
+export default function CommissionForm({ initialReason }: { initialReason?: string }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [reason, setReason] = useState(REASONS[0]);
+  const [reason, setReason] = useState(
+    initialReason && REASONS.includes(initialReason) ? initialReason : REASONS[0]
+  );
   const [subject, setSubject] = useState("");
   const [deadline, setDeadline] = useState("");
   const [budget, setBudget] = useState("");
