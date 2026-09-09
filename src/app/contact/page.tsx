@@ -8,9 +8,9 @@ export const metadata: Metadata = {
 export default async function ContactPage({
   searchParams,
 }: {
-  searchParams: Promise<{ piece?: string; title?: string }>;
+  searchParams: Promise<{ piece?: string; title?: string; reason?: string }>;
 }) {
-  const { title } = await searchParams;
+  const { title, reason } = await searchParams;
 
   const initialMessage = title
     ? `Hi Ariel, I'm interested in "${title}" from your gallery. `
@@ -26,7 +26,7 @@ export default async function ContactPage({
       </p>
 
       <div className="mt-10">
-        <ContactForm initialMessage={initialMessage} />
+        <ContactForm initialMessage={initialMessage} initialReason={reason} />
       </div>
     </section>
   );

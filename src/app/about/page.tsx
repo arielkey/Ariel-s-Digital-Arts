@@ -61,6 +61,42 @@ export default function AboutPage() {
           Shop Prints &amp; Apparel
         </Link>
       </div>
+
+      <div
+        id="commissions"
+        className="mt-20 scroll-mt-24 rounded-2xl border border-gold-200 bg-white p-6 sm:p-8"
+      >
+        <h2 className="font-display text-2xl text-ink-900">Custom Commissions</h2>
+        <p className="mt-3 text-base leading-relaxed text-foreground/80">
+          Want something made just for you? I take on a limited number of
+          custom pieces — send me the details and I&apos;ll let you know if
+          it&apos;s something I can take on, then we&apos;ll work out the rest
+          together.
+        </p>
+
+        <p className="mt-5 text-sm font-medium uppercase tracking-wide text-sage-700">
+          When you reach out, include:
+        </p>
+        <ul className="mt-2 space-y-1.5 text-base text-foreground/80">
+          <li>• A reference image or some inspiration for what you have in mind</li>
+          <li>• The subject (a character, a pet, a scene — whatever it is)</li>
+          <li>• Your deadline, if you have one</li>
+          <li>• Your budget range</li>
+        </ul>
+
+        <p className="mt-5 text-sm text-foreground/60">
+          As a rough guide, an 8&times;10 original typically runs $110&ndash;$150
+          depending on detail and complexity — final pricing depends on size
+          and what you&apos;re looking for, so message me for an exact quote.
+        </p>
+
+        <Link
+          href="/contact?reason=Custom%20Commission"
+          className="mt-6 inline-block rounded-full bg-gold-400 px-6 py-3 text-sm font-medium text-ink-900 transition-colors hover:bg-gold-300"
+        >
+          Request a Commission
+        </Link>
+      </div>
     </section>
   );
 }

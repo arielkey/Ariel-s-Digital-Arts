@@ -22,12 +22,17 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { name, email, reason, message } = (await req.json()) as {
-    name?: string;
-    email?: string;
-    reason?: string;
-    message?: string;
-  };
+  const { name, email, reason, message, subject, deadline, budget, reference } =
+    (await req.json()) as {
+      name?: string;
+      email?: string;
+      reason?: string;
+      message?: string;
+      subject?: string;
+      deadline?: string;
+      budget?: string;
+      reference?: string;
+    };
 
   if (!name || !email || !message) {
     return NextResponse.json({ error: "Name, email, and message are required." }, { status: 400 });
@@ -35,6 +40,13 @@ export async function POST(req: NextRequest) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: "That email address doesn't look right." }, { status: 400 });
   }
+
+  const commissionDetails = [
+    subject ? `<p><strong>Subject:</strong> ${escapeHtml(subject)}</p>` : "",
+    deadline ? `<p><strong>Deadline:</strong> ${escapeHtml(deadline)}</p>` : "",
+    budget ? `<p><strong>Budget range:</strong> ${escapeHtml(budget)}</p>` : "",
+    reference ? `<p><strong>Reference / inspiration:</strong> ${escapeHtml(reference)}</p>` : "",
+  ].join("");
 
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -50,6 +62,7 @@ export async function POST(req: NextRequest) {
       html: `
         <p><strong>From:</strong> ${escapeHtml(name)} (${escapeHtml(email)})</p>
         ${reason ? `<p><strong>Reason:</strong> ${escapeHtml(reason)}</p>` : ""}
+        ${commissionDetails}
         <p><strong>Message:</strong></p>
         <p>${escapeHtml(message).replace(/\n/g, "<br>")}</p>
       `,

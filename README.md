@@ -162,7 +162,14 @@ from a real webhook endpoint in the Stripe dashboard once deployed.
 3. ✅ Gallery page — Supabase-backed original art listings, buy/inquire flow (Supabase not yet connected — placeholder pieces)
 4. ✅ About page — brand story
 5. ✅ Contact page — form + email delivery via Resend (not yet connected — see below)
-6. Custom commissions — a way for customers to request/start a commission (planned, not yet scoped)
+6. ✅ Custom commissions — a "Custom Commissions" section on the About page
+   (`/about#commissions`, linked from the main nav), with a "Request a
+   Commission" button that pre-fills the Contact form's reason and reveals
+   commission-specific fields (subject, deadline, budget, reference/inspiration).
+   Inquiry-only — no deposit/payment flow; Ariel handles that manually after
+   the initial message. Includes a soft pricing note ($110–$150 for an 8×10)
+   as a rough guide — update or remove it in `src/app/about/page.tsx` if you'd
+   rather not publish numbers yet.
 7. Polish, SEO, analytics
 
 ## Deploying
