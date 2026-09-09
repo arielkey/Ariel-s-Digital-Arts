@@ -7,18 +7,21 @@ import Logo from "./Logo";
 import TipJarButton from "./TipJarButton";
 import CartButton from "./CartButton";
 import ThemeToggle from "./ThemeToggle";
+import LanguageToggle from "./LanguageToggle";
+import { useLanguage } from "./LanguageProvider";
 
 const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/shop", label: "Shop" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/about", label: "About" },
-  { href: "/about#commissions", label: "Commissions" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", key: "nav.home" },
+  { href: "/shop", key: "nav.shop" },
+  { href: "/gallery", key: "nav.gallery" },
+  { href: "/about", key: "nav.about" },
+  { href: "/about#commissions", key: "nav.commissions" },
+  { href: "/contact", key: "nav.contact" },
 ];
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <header className="sticky top-0 z-40 border-b border-sage-200/60 bg-cream-50/90 backdrop-blur">
@@ -37,18 +40,19 @@ export default function Header() {
               href={link.href}
               className="text-sm font-medium text-foreground/80 transition-colors hover:text-link"
             >
-              {link.label}
+              {t(link.key)}
             </Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-4">
+          <LanguageToggle />
           <ThemeToggle />
           <CartButton />
           <TipJarButton />
           <button
             className="text-sage-800 md:hidden cursor-pointer"
-            aria-label="Toggle menu"
+            aria-label={t("common.toggleMenu")}
             onClick={() => setMenuOpen((v) => !v)}
           >
             {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -65,7 +69,7 @@ export default function Header() {
               onClick={() => setMenuOpen(false)}
               className="rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-sage-50 hover:text-link"
             >
-              {link.label}
+              {t(link.key)}
             </Link>
           ))}
         </nav>

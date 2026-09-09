@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "./CartContext";
+import { useLanguage } from "./LanguageProvider";
 import type { CartItem } from "@/lib/types";
 
 export default function AddToCartButton({
@@ -12,6 +13,7 @@ export default function AddToCartButton({
   variant?: "sage" | "gold";
 }) {
   const { addItem } = useCart();
+  const { t } = useLanguage();
   const [added, setAdded] = useState(false);
 
   function handleClick() {
@@ -30,7 +32,7 @@ export default function AddToCartButton({
       onClick={handleClick}
       className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors cursor-pointer ${colors}`}
     >
-      {added ? "Added!" : "Add to Cart"}
+      {added ? t("cart.added") : t("cart.addToCart")}
     </button>
   );
 }

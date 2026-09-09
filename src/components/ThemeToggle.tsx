@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
+import { useLanguage } from "./LanguageProvider";
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  const { t } = useLanguage();
   const [mounted, setMounted] = useState(false);
 
   // Avoid a hydration mismatch: the real theme is only known after mount.
@@ -15,7 +17,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      aria-label="Toggle dark mode"
+      aria-label={t("common.toggleDarkMode")}
       className="text-sage-800 cursor-pointer"
     >
       {mounted && theme === "dark" ? (

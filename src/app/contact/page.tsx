@@ -1,69 +1,10 @@
 import type { Metadata } from "next";
-import { Mail } from "lucide-react";
-import { InstagramIcon, TikTokIcon } from "@/components/SocialIcons";
-import FeedbackForm from "@/components/FeedbackForm";
+import ContactPageContent from "@/components/ContactPageContent";
 
 export const metadata: Metadata = {
   title: "Contact | Ariel's Digital Arts",
 };
 
 export default function ContactPage() {
-  return (
-    <section className="mx-auto max-w-2xl px-4 py-20 text-center sm:px-6">
-      <h1 className="font-display text-3xl text-foreground">Contact</h1>
-      <p className="mt-3 text-foreground/70">
-        Questions about an order, or interested in a piece from the gallery?
-        Reach out any time — I&apos;d love to hear from you.
-      </p>
-
-      <a
-        href="mailto:executiveorganizeak@gmail.com"
-        className="mt-8 inline-flex items-center gap-2 rounded-full bg-sage-600 px-6 py-3 text-sm font-medium text-mist-50 transition-colors hover:bg-sage-700"
-      >
-        <Mail className="h-4 w-4" />
-        executiveorganizeak@gmail.com
-      </a>
-
-      <div className="mt-8 flex items-center justify-center gap-6">
-        <a
-          href="https://instagram.com/arielsdigitalarts"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-          className="text-link transition-colors hover:text-sage-800"
-        >
-          <InstagramIcon className="h-7 w-7" />
-        </a>
-        <a
-          href="https://tiktok.com/@arielsdigitalarts"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="TikTok"
-          className="text-link transition-colors hover:text-sage-800"
-        >
-          <TikTokIcon className="h-7 w-7" />
-        </a>
-      </div>
-
-      <p className="mt-10 text-sm text-foreground/60">
-        Looking to commission a custom piece? Head over to the{" "}
-        <a href="/about#commissions" className="font-medium text-link underline hover:text-sage-800">
-          Commissions
-        </a>{" "}
-        section instead.
-      </p>
-
-      <div className="mt-16 rounded-2xl border border-sage-200 bg-cream-50 p-6 text-left sm:p-8">
-        <h2 className="font-display text-xl text-foreground">
-          Have feedback, a suggestion, or a complaint?
-        </h2>
-        <p className="mt-2 text-sm text-foreground/70">
-          Let me know here — I read every message.
-        </p>
-        <div className="mt-6">
-          <FeedbackForm />
-        </div>
-      </div>
-    </section>
-  );
+  return <ContactPageContent />;
 }

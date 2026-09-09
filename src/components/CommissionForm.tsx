@@ -1,13 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "./LanguageProvider";
 
-const REASONS = ["Custom Commission", "General Inquiry", "Order Question", "Other"];
+const REASONS = [
+  { value: "Custom Commission", labelKey: "commissionForm.reasonCustomCommission" },
+  { value: "General Inquiry", labelKey: "commissionForm.reasonGeneralInquiry" },
+  { value: "Order Question", labelKey: "commissionForm.reasonOrderQuestion" },
+  { value: "Other", labelKey: "commissionForm.reasonOther" },
+];
 
 export default function CommissionForm() {
+  const { t } = useLanguage();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [reason, setReason] = useState(REASONS[0]);
+  const [reason, setReason] = useState(REASONS[0].value);
   const [subject, setSubject] = useState("");
   const [deadline, setDeadline] = useState("");
   const [budget, setBudget] = useState("");
@@ -35,7 +42,7 @@ export default function CommissionForm() {
         }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Something went wrong.");
+      if (!res.ok) throw new Error(data.error ?? t("commissionForm.error"));
       setStatus("success");
       setName("");
       setEmail("");
@@ -46,17 +53,15 @@ export default function CommissionForm() {
       setMessage("");
     } catch (err) {
       setStatus("error");
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : t("commissionForm.error"));
     }
   }
 
   if (status === "success") {
     return (
       <div className="rounded-2xl border border-sage-200 bg-sage-50 px-6 py-8 text-center">
-        <p className="font-display text-lg text-sage-800">Message sent!</p>
-        <p className="mt-2 text-sm text-foreground/70">
-          Thanks for reaching out — I&apos;ll get back to you soon.
-        </p>
+        <p className="font-display text-lg text-sage-800">{t("commissionForm.successTitle")}</p>
+        <p className="mt-2 text-sm text-foreground/70">{t("commissionForm.successBody")}</p>
       </div>
     );
   }
@@ -65,7 +70,7 @@ export default function CommissionForm() {
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="flex flex-col gap-1.5 text-sm font-medium text-foreground/80">
-          Name
+          {t("commissionForm.name")}
           <input
             type="text"
             required
@@ -75,7 +80,7 @@ export default function CommissionForm() {
           />
         </label>
         <label className="flex flex-col gap-1.5 text-sm font-medium text-foreground/80">
-          Email
+          {t("commissionForm.email")}
           <input
             type="email"
             required
@@ -87,15 +92,15 @@ export default function CommissionForm() {
       </div>
 
       <label className="flex flex-col gap-1.5 text-sm font-medium text-foreground/80">
-        Reason
+        {t("commissionForm.reason")}
         <select
           value={reason}
           onChange={(e) => setReason(e.target.value)}
           className="rounded-lg border border-sage-200 bg-cream-50 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
         >
           {REASONS.map((r) => (
-            <option key={r} value={r}>
-              {r}
+            <option key={r.value} value={r.value}>
+              {t(r.labelKey)}
             </option>
           ))}
         </select>
@@ -104,40 +109,40 @@ export default function CommissionForm() {
       {isCommission ? (
         <div className="grid gap-4 rounded-lg border border-gold-200 bg-gold-50/50 p-4 sm:grid-cols-2">
           <label className="flex flex-col gap-1.5 text-sm font-medium text-foreground/80">
-            Subject
+            {t("commissionForm.subject")}
             <input
               type="text"
-              placeholder="e.g. a dragon portrait, a pet, a character"
+              placeholder={t("commissionForm.subjectPlaceholder")}
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               className="rounded-lg border border-sage-200 bg-cream-50 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
             />
           </label>
           <label className="flex flex-col gap-1.5 text-sm font-medium text-foreground/80">
-            Deadline
+            {t("commissionForm.deadline")}
             <input
               type="text"
-              placeholder="e.g. flexible, or a specific date"
+              placeholder={t("commissionForm.deadlinePlaceholder")}
               value={deadline}
               onChange={(e) => setDeadline(e.target.value)}
               className="rounded-lg border border-sage-200 bg-cream-50 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
             />
           </label>
           <label className="flex flex-col gap-1.5 text-sm font-medium text-foreground/80">
-            Budget range
+            {t("commissionForm.budget")}
             <input
               type="text"
-              placeholder="e.g. $100–150"
+              placeholder={t("commissionForm.budgetPlaceholder")}
               value={budget}
               onChange={(e) => setBudget(e.target.value)}
               className="rounded-lg border border-sage-200 bg-cream-50 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
             />
           </label>
           <label className="flex flex-col gap-1.5 text-sm font-medium text-foreground/80">
-            Reference / inspiration
+            {t("commissionForm.reference")}
             <input
               type="text"
-              placeholder="link to an image, or describe it"
+              placeholder={t("commissionForm.referencePlaceholder")}
               value={reference}
               onChange={(e) => setReference(e.target.value)}
               className="rounded-lg border border-sage-200 bg-cream-50 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
@@ -147,11 +152,11 @@ export default function CommissionForm() {
       ) : null}
 
       <label className="flex flex-col gap-1.5 text-sm font-medium text-foreground/80">
-        Message
+        {t("commissionForm.message")}
         <textarea
           required
           rows={5}
-          placeholder="Tell me a bit more about what you have in mind."
+          placeholder={t("commissionForm.messagePlaceholder")}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           className="rounded-lg border border-sage-200 bg-cream-50 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
@@ -165,7 +170,7 @@ export default function CommissionForm() {
         disabled={status === "loading"}
         className="self-start rounded-full bg-gold-400 px-6 py-2.5 text-sm font-medium text-ink-900 transition-colors hover:bg-gold-300 disabled:opacity-60 cursor-pointer"
       >
-        {status === "loading" ? "Sending…" : "Send Message"}
+        {status === "loading" ? t("commissionForm.sending") : t("commissionForm.send")}
       </button>
     </form>
   );

@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/CartContext";
 import CartDrawer from "@/components/CartDrawer";
 import ThemeProvider from "@/components/ThemeProvider";
+import LanguageProvider from "@/components/LanguageProvider";
 
 const bodyFont = Geist({
   variable: "--font-body",
@@ -33,14 +34,24 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-cream-100 text-foreground">
-        <ThemeProvider>
-          <CartProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <CartDrawer />
-          </CartProvider>
-        </ThemeProvider>
+        <script
+          // Runs before hydration so the page never flashes English/LTR
+          // before a stored language preference is applied.
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var l=localStorage.getItem('language');if(l==='es'||l==='ar'){document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';}}catch(e){}})();",
+          }}
+        />
+        <LanguageProvider>
+          <ThemeProvider>
+            <CartProvider>
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <CartDrawer />
+            </CartProvider>
+          </ThemeProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

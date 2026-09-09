@@ -1,5 +1,6 @@
-import Link from "next/link";
 import Hero from "@/components/Hero";
+import HomeIntro from "@/components/HomeIntro";
+import SectionHeader from "@/components/SectionHeader";
 import ColoringPageBanner from "@/components/ColoringPageBanner";
 import ProductCard from "@/components/ProductCard";
 import ArtCard from "@/components/ArtCard";
@@ -16,26 +17,10 @@ export default async function Home() {
     <>
       <Hero />
 
-      <section className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6">
-        <h2 className="font-display text-2xl text-sage-800 sm:text-3xl">
-          Hand-drawn fantasy, made to keep
-        </h2>
-        <p className="mt-4 text-base leading-relaxed text-foreground/70">
-          Ariel&apos;s Digital Arts is a one-woman studio painting original fantasy
-          worlds — dragons, quiet keepers, and the magic in between. Every
-          piece starts as a digital painting, and many find their way onto
-          prints, apparel, and puzzles so you can bring a little bit of that
-          world home.
-        </p>
-      </section>
+      <HomeIntro />
 
       <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <div className="mb-8 flex items-end justify-between">
-          <h2 className="font-display text-2xl text-foreground">Featured Original Art</h2>
-          <Link href="/gallery" className="text-sm font-medium text-link hover:text-sage-800">
-            View gallery →
-          </Link>
-        </div>
+        <SectionHeader titleKey="home.featuredArt" linkHref="/gallery" linkKey="home.viewGallery" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
           {featuredArt.map((art) => (
             <ArtCard key={art.id} art={art} />
@@ -46,12 +31,7 @@ export default async function Home() {
       <ColoringPageBanner />
 
       <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <div className="mb-8 flex items-end justify-between">
-          <h2 className="font-display text-2xl text-foreground">From the Shop</h2>
-          <Link href="/shop" className="text-sm font-medium text-link hover:text-sage-800">
-            Shop all →
-          </Link>
-        </div>
+        <SectionHeader titleKey="home.fromShop" linkHref="/shop" linkKey="home.shopAll" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featuredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />

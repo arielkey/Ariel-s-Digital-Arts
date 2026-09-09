@@ -1,9 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import PlaceholderArt from "./PlaceholderArt";
 import AddToCartButton from "./AddToCartButton";
+import { useLanguage } from "./LanguageProvider";
 import type { ArtPiece } from "@/lib/types";
 
 export default function ArtCard({ art }: { art: ArtPiece }) {
+  const { t } = useLanguage();
   const canBuy = art.status === "available" && !!art.price;
   const canInquire = art.status === "inquire";
 
@@ -30,10 +34,10 @@ export default function ArtCard({ art }: { art: ArtPiece }) {
         <div className="mt-auto flex items-center justify-between pt-2">
           <span className="text-sm font-medium text-foreground/80">
             {art.status === "sold"
-              ? "Sold"
+              ? t("artCard.sold")
               : art.price
                 ? `$${art.price.toFixed(2)}`
-                : "Inquire for price"}
+                : t("artCard.inquireForPrice")}
           </span>
           {canBuy ? (
             <AddToCartButton
@@ -55,11 +59,11 @@ export default function ArtCard({ art }: { art: ArtPiece }) {
               )}`}
               className="rounded-full bg-gold-400 px-4 py-1.5 text-sm font-medium text-ink-900 transition-colors hover:bg-gold-300"
             >
-              Inquire
+              {t("artCard.inquire")}
             </a>
           ) : (
             <span className="rounded-full bg-sage-100 px-4 py-1.5 text-sm font-medium text-sage-400">
-              Sold
+              {t("artCard.sold")}
             </span>
           )}
         </div>

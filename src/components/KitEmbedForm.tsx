@@ -36,5 +36,5 @@ export default function KitEmbedForm() {
     };
   }, []);
 
-  return <div ref={containerRef} className="w-full max-w-md" />;
+  return <div ref={containerRef} className="w-full min-w-0 max-w-md" />;
 }

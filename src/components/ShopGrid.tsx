@@ -2,19 +2,13 @@
 
 import { useMemo, useState } from "react";
 import ProductCard from "./ProductCard";
+import { useLanguage } from "./LanguageProvider";
 import type { ProductCategory, ShopProduct } from "@/lib/types";
-
-const CATEGORY_LABELS: Record<ProductCategory, string> = {
-  apparel: "Apparel",
-  puzzles: "Puzzles",
-  prints: "Prints",
-  mats: "Mats",
-  other: "Other",
-};
 
 const CATEGORY_ORDER: ProductCategory[] = ["apparel", "puzzles", "prints", "mats", "other"];
 
 export default function ShopGrid({ products }: { products: ShopProduct[] }) {
+  const { t } = useLanguage();
   const [active, setActive] = useState<ProductCategory | "all">("all");
 
   const categories = useMemo(
@@ -35,7 +29,7 @@ export default function ShopGrid({ products }: { products: ShopProduct[] }) {
               : "bg-sage-50 text-link hover:bg-sage-100"
           }`}
         >
-          All
+          {t("shopGrid.all")}
         </button>
         {categories.map((category) => (
           <button
@@ -47,13 +41,13 @@ export default function ShopGrid({ products }: { products: ShopProduct[] }) {
                 : "bg-sage-50 text-link hover:bg-sage-100"
             }`}
           >
-            {CATEGORY_LABELS[category]}
+            {t(`shopGrid.${category}`)}
           </button>
         ))}
       </div>
 
       {filtered.length === 0 ? (
-        <p className="text-sm text-foreground/60">No items in this category yet.</p>
+        <p className="text-sm text-foreground/60">{t("shopGrid.empty")}</p>
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((product) => (

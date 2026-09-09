@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { Heart, X } from "lucide-react";
+import { useLanguage } from "./LanguageProvider";
 
 const PRESET_AMOUNTS = [3, 5, 10, 20];
 
 export default function TipJarButton() {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [amount, setAmount] = useState<number>(5);
   const [custom, setCustom] = useState("");
@@ -24,10 +26,10 @@ export default function TipJarButton() {
         body: JSON.stringify({ amount: selectedAmount }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Something went wrong.");
+      if (!res.ok) throw new Error(data.error ?? t("tipJar.error"));
       window.location.href = data.url;
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(err instanceof Error ? err.message : t("tipJar.error"));
     } finally {
       setLoading(false);
     }
@@ -40,7 +42,7 @@ export default function TipJarButton() {
         className="inline-flex items-center gap-1.5 rounded-full bg-gold-400 px-4 py-2 text-sm font-medium text-ink-900 transition-colors hover:bg-gold-300 cursor-pointer"
       >
         <Heart className="h-4 w-4" strokeWidth={2} />
-        Tip Jar
+        {t("tipJar.button")}
       </button>
 
       {open ? (
@@ -53,18 +55,16 @@ export default function TipJarButton() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="font-display text-lg text-sage-800">Leave a Tip</h2>
+              <h2 className="font-display text-lg text-sage-800">{t("tipJar.leaveATip")}</h2>
               <button
                 onClick={() => setOpen(false)}
-                aria-label="Close"
+                aria-label={t("tipJar.close")}
                 className="text-link/60 hover:text-sage-800 cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
-            <p className="mb-4 text-sm text-foreground/70">
-              If you enjoy my art, a tip helps keep the ink flowing. Thank you!
-            </p>
+            <p className="mb-4 text-sm text-foreground/70">{t("tipJar.description")}</p>
             <div className="mb-4 grid grid-cols-4 gap-2">
               {PRESET_AMOUNTS.map((preset) => (
                 <button
@@ -84,11 +84,11 @@ export default function TipJarButton() {
               ))}
             </div>
             <label className="mb-4 block text-sm text-foreground/70">
-              Custom amount
+              {t("tipJar.customAmount")}
               <input
                 type="number"
                 min={1}
-                placeholder="Enter amount"
+                placeholder={t("tipJar.customAmountPlaceholder")}
                 value={custom}
                 onChange={(e) => setCustom(e.target.value)}
                 className="mt-1 w-full rounded-lg border border-sage-200 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
@@ -100,7 +100,7 @@ export default function TipJarButton() {
               disabled={loading || selectedAmount < 1}
               className="w-full rounded-full bg-sage-600 px-4 py-2.5 text-sm font-medium text-mist-50 transition-colors hover:bg-sage-700 disabled:opacity-50 cursor-pointer"
             >
-              {loading ? "Redirecting…" : `Tip $${selectedAmount || 0}`}
+              {loading ? t("tipJar.redirecting") : t("tipJar.tip", { amount: selectedAmount || 0 })}
             </button>
           </div>
         </div>

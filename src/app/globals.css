@@ -131,3 +131,15 @@ body {
 .font-display {
   font-family: var(--font-display), Georgia, serif;
 }
+
+/* Kit's hosted embed form ships fixed pixel widths (up to 700px) from its
+   own stylesheet, which overflows our narrower footer/banner columns.
+   Force it and its descendants to stay within their container. */
+.formkit-form,
+.formkit-form * {
+  max-width: 100% !important;
+}
+
+.formkit-form {
+  min-width: 0 !important;
+}
