@@ -136,13 +136,24 @@ from a real webhook endpoint in the Stripe dashboard once deployed.
 
 1. ✅ Project scaffold + homepage (hero, brand intro, featured items, tip jar, newsletter banner)
 2. ✅ Shop page — live Printful catalog, category filters, Stripe checkout, auto-fulfillment webhook
-3. ✅ Gallery page — Supabase-backed original art listings, buy/inquire flow
-4. About page — brand story
+3. ✅ Gallery page — Supabase-backed original art listings, buy/inquire flow (Supabase not yet connected — placeholder pieces)
+4. ✅ About page — brand story
 5. Contact page — form + email delivery
-6. Polish, SEO, analytics, deploy to Vercel
+6. Polish, SEO, analytics
 
 ## Deploying
 
-Push to a GitHub repo and import it in [Vercel](https://vercel.com/new). Add
-all variables from `.env.example` to the Vercel project's Environment
-Variables before the first production deploy.
+**Live at [ariel-s-digital-arts.vercel.app](https://ariel-s-digital-arts.vercel.app)**,
+deployed via Vercel's GitHub integration (auto-deploys on every push to
+`main`). Production has `STRIPE_SECRET_KEY` (live), `STRIPE_WEBHOOK_SECRET`,
+`PRINTFUL_API_KEY`, and `PRINTFUL_STORE_ID` set in Vercel's Environment
+Variables — **the live Stripe key is active, so checkout processes real
+payments.** Supabase and ConvertKit variables aren't set yet, so Gallery and
+the newsletter forms still run on placeholder/disabled behavior in
+production too. A live-mode Stripe webhook is configured pointing at
+`/api/webhooks/stripe`, verified reachable (returns 400 on an unsigned
+request, confirming the route and secret are live).
+
+Adding new env vars later: Vercel project → Settings → Environment
+Variables → Add, then redeploy (Deployments tab → latest → "..." →
+Redeploy) for the change to take effect.
