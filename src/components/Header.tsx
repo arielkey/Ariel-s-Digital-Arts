@@ -26,9 +26,13 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-sage-200/60 bg-cream-50/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-        <Link href="/" className="flex items-center gap-3" onClick={() => setMenuOpen(false)}>
-          <Logo className="h-10 w-10" />
-          <span className="font-display text-lg tracking-wide text-sage-800">
+        <Link
+          href="/"
+          className="flex min-w-0 shrink items-center gap-3"
+          onClick={() => setMenuOpen(false)}
+        >
+          <Logo className="h-10 w-10 shrink-0" />
+          <span className="truncate font-display text-lg tracking-wide text-sage-800">
             Ariel&apos;s Digital Arts
           </span>
         </Link>
@@ -45,7 +49,7 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-4">
           <LanguageToggle />
           <ThemeToggle />
           <CartButton />

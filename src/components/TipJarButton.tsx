@@ -39,10 +39,11 @@ export default function TipJarButton() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="inline-flex items-center gap-1.5 rounded-full bg-gold-400 px-4 py-2 text-sm font-medium text-ink-900 transition-colors hover:bg-gold-300 cursor-pointer"
+        aria-label={t("tipJar.button")}
+        className="inline-flex items-center gap-1.5 rounded-full bg-gold-400 px-2.5 py-2 text-sm font-medium text-ink-900 transition-colors hover:bg-gold-300 cursor-pointer sm:px-4"
       >
         <Heart className="h-4 w-4" strokeWidth={2} />
-        {t("tipJar.button")}
+        <span className="hidden sm:inline">{t("tipJar.button")}</span>
       </button>
 
       {open ? (
