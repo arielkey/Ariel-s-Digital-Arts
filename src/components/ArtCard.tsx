@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import PlaceholderArt from "./PlaceholderArt";
-import BuyButton from "./BuyButton";
+import AddToCartButton from "./AddToCartButton";
 import type { ArtPiece } from "@/lib/types";
 
 export default function ArtCard({ art }: { art: ArtPiece }) {
@@ -37,9 +37,14 @@ export default function ArtCard({ art }: { art: ArtPiece }) {
                 : "Inquire for price"}
           </span>
           {canBuy ? (
-            <BuyButton
-              endpoint="/api/checkout/art"
-              payload={{ pieceId: art.id }}
+            <AddToCartButton
+              item={{
+                id: art.id,
+                type: "art",
+                title: art.title,
+                price: art.price!,
+                image: art.image,
+              }}
               variant="gold"
             />
           ) : canInquire ? (

@@ -24,3 +24,13 @@ export interface ArtPiece {
   status: "available" | "sold" | "inquire";
   href: string;
 }
+
+/** A line in the shopping cart — either a shop product or a one-off art piece. */
+export interface CartItem {
+  id: string;
+  type: "product" | "art";
+  title: string;
+  price: number;
+  image: string;
+  quantity: number;
+}

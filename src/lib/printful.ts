@@ -129,10 +129,9 @@ interface PrintfulOrderRecipient {
   email?: string;
 }
 
-/** Creates and confirms a Printful order so it enters fulfillment immediately. */
+/** Creates and confirms a Printful order (possibly multiple items) so it enters fulfillment immediately. */
 export async function createPrintfulOrder(
-  syncVariantId: number,
-  quantity: number,
+  items: { variantId: number; quantity: number }[],
   recipient: PrintfulOrderRecipient
 ) {
   const headers = printfulHeaders();
@@ -143,7 +142,7 @@ export async function createPrintfulOrder(
     headers: { ...headers, "Content-Type": "application/json" },
     body: JSON.stringify({
       recipient,
-      items: [{ sync_variant_id: syncVariantId, quantity }],
+      items: items.map((i) => ({ sync_variant_id: i.variantId, quantity: i.quantity })),
       confirm: true,
     }),
   });

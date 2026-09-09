@@ -5,10 +5,11 @@ import { createPrintfulOrder } from "@/lib/printful";
 import { supabaseAdmin } from "@/lib/supabase";
 
 /**
- * Stripe webhook — on a completed shop checkout, places the matching order
- * with Printful so it enters fulfillment automatically; on a completed
- * original-art checkout, marks that piece "sold" in Supabase. Configure this
- * URL (https://yourdomain.com/api/webhooks/stripe) in the Stripe dashboard,
+ * Stripe webhook — on a completed cart checkout, places one combined order
+ * with Printful (covering every shop item in the cart) so it enters
+ * fulfillment automatically, and marks any purchased original art pieces
+ * "sold" in Supabase. Configure this URL
+ * (https://yourdomain.com/api/webhooks/stripe) in the Stripe dashboard,
  * subscribed to checkout.session.completed, and set STRIPE_WEBHOOK_SECRET.
  *
  * Fulfillment is attempted once; a failure is logged rather than retried,
@@ -32,15 +33,23 @@ export async function POST(req: NextRequest) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
-    const variantId = Number(session.metadata?.printfulVariantId);
 
-    if (Number.isFinite(variantId)) {
+    let printfulItems: { variantId: number; quantity: number }[] = [];
+    let artPieceIds: string[] = [];
+    try {
+      printfulItems = JSON.parse(session.metadata?.printfulItems ?? "[]");
+      artPieceIds = JSON.parse(session.metadata?.artPieceIds ?? "[]");
+    } catch {
+      console.error("Malformed cart metadata on session", session.id);
+    }
+
+    if (printfulItems.length > 0) {
       const shipping = session.collected_information?.shipping_details;
       const address = shipping?.address;
 
       if (shipping?.name && address?.line1 && address.city && address.country && address.postal_code) {
         try {
-          await createPrintfulOrder(variantId, 1, {
+          await createPrintfulOrder(printfulItems, {
             name: shipping.name,
             address1: address.line1,
             address2: address.line2 ?? undefined,
@@ -58,14 +67,13 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const artPieceId = session.metadata?.artPieceId;
-    if (artPieceId && supabaseAdmin) {
+    if (artPieceIds.length > 0 && supabaseAdmin) {
       const { error } = await supabaseAdmin
         .from("art_pieces")
         .update({ status: "sold" })
-        .eq("id", artPieceId);
+        .in("id", artPieceIds);
       if (error) {
-        console.error("Failed to mark art piece sold", artPieceId, error.message);
+        console.error("Failed to mark art pieces sold", artPieceIds, error.message);
       }
     }
   }

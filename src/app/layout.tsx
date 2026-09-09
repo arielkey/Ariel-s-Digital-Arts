@@ -4,6 +4,8 @@ import { Cinzel } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { CartProvider } from "@/components/CartContext";
+import CartDrawer from "@/components/CartDrawer";
 
 const bodyFont = Geist({
   variable: "--font-body",
@@ -29,9 +31,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${bodyFont.variable} ${displayFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream-100 text-foreground">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );

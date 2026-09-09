@@ -1,6 +1,6 @@
 import Image from "next/image";
 import PlaceholderArt from "./PlaceholderArt";
-import BuyButton from "./BuyButton";
+import AddToCartButton from "./AddToCartButton";
 import type { ShopProduct } from "@/lib/types";
 
 export default function ProductCard({ product }: { product: ShopProduct }) {
@@ -28,9 +28,14 @@ export default function ProductCard({ product }: { product: ShopProduct }) {
           <span className="text-sm font-medium text-foreground/80">
             ${product.price.toFixed(2)}
           </span>
-          <BuyButton
-            endpoint="/api/checkout/product"
-            payload={{ productId: product.id }}
+          <AddToCartButton
+            item={{
+              id: product.id,
+              type: "product",
+              title: product.title,
+              price: product.price,
+              image: product.image,
+            }}
             variant="sage"
           />
         </div>

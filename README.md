@@ -43,14 +43,16 @@ src/
     contact/             Contact — form (reads ?piece=&title= for gallery inquiries)
     api/
       checkout/tip/      Stripe Checkout session for the tip jar
-      checkout/product/  Stripe Checkout session for a shop item
-      checkout/art/      Stripe Checkout session for an original art piece
-      webhooks/stripe/   On payment: places the Printful fulfillment order, or
-                         marks the matching art piece "sold" in Supabase
+      checkout/cart/     Stripe Checkout session for the whole cart (shop
+                         items + original art, multiple items/quantities)
+      webhooks/stripe/   On payment: places one combined Printful fulfillment
+                         order for all shop items, and marks any purchased
+                         art pieces "sold" in Supabase
       newsletter/        Kit (formerly ConvertKit) signup proxy
       contact/           Sends contact form submissions via Resend
-  components/            Header, Footer, Hero, ProductCard, ArtCard, BuyButton, ShopGrid,
-                         ContactForm, etc.
+  components/            Header, Footer, Hero, ProductCard, ArtCard, ShopGrid,
+                         ContactForm, CartContext, CartDrawer, CartButton,
+                         AddToCartButton, etc.
   lib/
     types.ts             Shared Product / ArtPiece types
     placeholder-data.ts  Sample data used until Printful/Supabase are live
@@ -192,7 +194,14 @@ from a real webhook endpoint in the Stripe dashboard once deployed.
    the initial message. Includes a soft pricing note ($110–$150 for an 8×10)
    as a rough guide — update or remove it in `src/app/about/page.tsx` if you'd
    rather not publish numbers yet.
-7. Polish, SEO, analytics
+7. ✅ Shopping cart — "Buy" on Shop and Gallery items now adds to a cart
+   (persisted in `localStorage`, via `CartContext`) instead of checking out
+   immediately. A cart icon in the header (with an item-count badge) opens a
+   drawer to review items, adjust quantities, remove items, and check out —
+   one Stripe Checkout session covers the whole cart, and the webhook places
+   one combined Printful order plus marks any purchased art pieces sold.
+   Original art pieces are capped at quantity 1 (one-of-a-kind, no duplicates).
+8. Polish, SEO, analytics
 
 ## Deploying
 

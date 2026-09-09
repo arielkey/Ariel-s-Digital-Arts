@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
 import TipJarButton from "./TipJarButton";
+import CartButton from "./CartButton";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -40,7 +41,8 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
+          <CartButton />
           <TipJarButton />
           <button
             className="text-sage-800 md:hidden cursor-pointer"
