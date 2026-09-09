@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import Logo from "./Logo";
-import NewsletterForm from "./NewsletterForm";
+import KitEmbedForm from "./KitEmbedForm";
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -91,7 +91,7 @@ export default function Footer() {
           <p className="text-sm text-cream-100/70">
             Occasional updates on new pieces, prints, and drops. No spam.
           </p>
-          <NewsletterForm variant="footer" />
+          <KitEmbedForm />
         </div>
       </div>
 

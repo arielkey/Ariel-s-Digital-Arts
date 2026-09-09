@@ -1,4 +1,4 @@
-import NewsletterForm from "./NewsletterForm";
+import KitEmbedForm from "./KitEmbedForm";
 
 export default function ColoringPageBanner() {
   return (
@@ -13,7 +13,7 @@ export default function ColoringPageBanner() {
             fantasy art collection, plus first look at new pieces and drops.
           </p>
         </div>
-        <NewsletterForm variant="banner" />
+        <KitEmbedForm />
       </div>
     </section>
   );

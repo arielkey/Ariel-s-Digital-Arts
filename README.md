@@ -48,11 +48,10 @@ src/
       webhooks/stripe/   On payment: places one combined Printful fulfillment
                          order for all shop items, and marks any purchased
                          art pieces "sold" in Supabase
-      newsletter/        Kit (formerly ConvertKit) signup proxy
       contact/           Sends contact form submissions via Resend
   components/            Header, Footer, Hero, ProductCard, ArtCard, ShopGrid,
-                         ContactForm, CartContext, CartDrawer, CartButton,
-                         AddToCartButton, etc.
+                         KitEmbedForm, ContactForm, CartContext, CartDrawer,
+                         CartButton, AddToCartButton, etc.
   lib/
     types.ts             Shared Product / ArtPiece types
     placeholder-data.ts  Sample data used until Printful/Supabase are live
@@ -135,24 +134,28 @@ it's wired up:
 Replying to a contact email goes straight back to the sender — the route
 sets `reply_to` to their address automatically.
 
-### Going live with the newsletter (Kit)
+### Newsletter (Kit)
 
-The footer and homepage coloring-page signup forms both post to
-`/api/newsletter`, which shows a friendly "not connected yet" error until
-Kit is wired up:
+The footer and homepage coloring-page signup forms both use
+[`KitEmbedForm`](src/components/KitEmbedForm.tsx) — Kit's own hosted form,
+embedded via their script widget (form id `9895460`, "Website signups").
 
-1. In your Kit account, go to **Settings → Developer** and create a **V4 API
-   Key**.
-2. Find the **Form ID** for the form you want signups added to — Kit's
-   dashboard shows this when you open a specific form (or list forms via the
-   API: `GET https://api.kit.com/v4/forms` with the `X-Kit-Api-Key` header).
-3. Add `KIT_API_KEY` and `KIT_FORM_ID` to `.env.local` (and Vercel's
-   Environment Variables once ready).
+**Why not a native API-based form?** Kit's free plan blocks third-party
+apps from writing subscribers via the API (confirmed: `GET /v4/forms`
+works, but `POST /v4/forms/{id}/subscribers` returns 404 on every form on
+the account, regardless of which form). Kit's own embed widget still works
+on free, since it's a first-party form rather than a third-party
+integration — verified end-to-end, a real signup through the embedded form
+returned "Success! Now check your email to confirm your subscription."
 
-Note: this project was originally scaffolded against ConvertKit's older v3
-API. Kit's v3 is deprecated (still works for now, but scheduled to be
-sunset), so `src/app/api/newsletter/route.ts` uses the current v4 API
-(`X-Kit-Api-Key` header, `POST /v4/forms/{id}/subscribers`) instead.
+**If the account upgrades to Kit's paid Creator plan later**, the API-based
+approach can be restored for a form that matches the site's own styling
+instead of Kit's: `KIT_API_KEY` / `KIT_FORM_ID` are already documented in
+`.env.example` for that. The previous implementation (a custom
+`NewsletterForm` component posting to `/api/newsletter`, which called
+`POST https://api.kit.com/v4/forms/{id}/subscribers` with the
+`X-Kit-Api-Key` header) is preserved in git history — see the commit that
+introduced `KitEmbedForm`.
 
 ### Testing checkout locally with the Stripe CLI
 
@@ -201,7 +204,9 @@ from a real webhook endpoint in the Stripe dashboard once deployed.
    one Stripe Checkout session covers the whole cart, and the webhook places
    one combined Printful order plus marks any purchased art pieces sold.
    Original art pieces are capped at quantity 1 (one-of-a-kind, no duplicates).
-8. Polish, SEO, analytics
+8. ✅ Newsletter — connected and verified live via Kit's own embed widget
+   (see "Newsletter (Kit)" below for why, instead of a native API form)
+9. Polish, SEO, analytics
 
 ## Deploying
 
