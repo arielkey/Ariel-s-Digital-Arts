@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CommissionForm from "@/components/CommissionForm";
 
 export const metadata: Metadata = {
   title: "About | Ariel's Digital Arts",
@@ -90,12 +91,9 @@ export default function AboutPage() {
           and what you&apos;re looking for, so message me for an exact quote.
         </p>
 
-        <Link
-          href="/contact?reason=Custom%20Commission"
-          className="mt-6 inline-block rounded-full bg-gold-400 px-6 py-3 text-sm font-medium text-ink-900 transition-colors hover:bg-gold-300"
-        >
-          Request a Commission
-        </Link>
+        <div className="mt-8 border-t border-gold-200 pt-8">
+          <CommissionForm />
+        </div>
       </div>
     </section>
   );

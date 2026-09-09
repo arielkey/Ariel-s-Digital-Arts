@@ -39,8 +39,10 @@ src/
     page.tsx           Homepage
     shop/               Shop (Printful items) — live catalog + category filters
     gallery/            Gallery (original art) — live Supabase listings + buy/inquire
-    about/               About — brand story
-    contact/             Contact — form (reads ?piece=&title= for gallery inquiries)
+    about/               About — brand story + Commissions section (the
+                         commission request form lives here, at #commissions)
+    contact/             Contact — just email + social links, points to
+                         Commissions for custom work
     api/
       checkout/tip/      Stripe Checkout session for the tip jar
       checkout/cart/     Stripe Checkout session for the whole cart (shop
@@ -48,10 +50,10 @@ src/
       webhooks/stripe/   On payment: places one combined Printful fulfillment
                          order for all shop items, and marks any purchased
                          art pieces "sold" in Supabase
-      contact/           Sends contact form submissions via Resend
+      contact/           Sends commission requests via Resend
   components/            Header, Footer, Hero, ProductCard, ArtCard, ShopGrid,
-                         KitEmbedForm, ContactForm, CartContext, CartDrawer,
-                         CartButton, AddToCartButton, etc.
+                         KitEmbedForm, CommissionForm, SocialIcons,
+                         CartContext, CartDrawer, CartButton, AddToCartButton, etc.
   lib/
     types.ts             Shared Product / ArtPiece types
     placeholder-data.ts  Sample data used until Printful/Supabase are live
@@ -114,10 +116,10 @@ The Gallery page works today with sample data. To connect real pieces:
    `inquire` for an "Inquire" link to the Contact page, or `sold` to disable
    both.
 
-### Going live with the contact form
+### Going live with the commission form
 
-The form works today, but shows a friendly "not connected yet" error until
-it's wired up:
+The form (on `/about#commissions`) works today, but shows a friendly "not
+connected yet" error until it's wired up:
 
 1. Create a free [Resend](https://resend.com) account, verify or skip
    domain verification (their `onboarding@resend.dev` sender works without
@@ -185,18 +187,20 @@ from a real webhook endpoint in the Stripe dashboard once deployed.
 2. ✅ Shop page — live Printful catalog, category filters, Stripe checkout, auto-fulfillment webhook
 3. ✅ Gallery page — Supabase-backed original art listings, buy/inquire flow (Supabase not yet connected — placeholder pieces)
 4. ✅ About page — brand story
-5. ✅ Contact page — form + email delivery via Resend, connected and
-   verified live in production (delivers to `CONTACT_TO_EMAIL`, sender is
-   currently Resend's shared `onboarding@resend.dev` until a custom domain
-   is verified — see "Going live with the contact form" below)
+5. ✅ Contact page — simplified to just email + social links (no form).
+   Email delivery via Resend, connected and verified live in production
+   (delivers to `CONTACT_TO_EMAIL`, sender is currently Resend's shared
+   `onboarding@resend.dev` until a custom domain is verified — see "Going
+   live with the contact form" below)
 6. ✅ Custom commissions — a "Custom Commissions" section on the About page
-   (`/about#commissions`, linked from the main nav), with a "Request a
-   Commission" button that pre-fills the Contact form's reason and reveals
-   commission-specific fields (subject, deadline, budget, reference/inspiration).
-   Inquiry-only — no deposit/payment flow; Ariel handles that manually after
-   the initial message. Includes a soft pricing note ($110–$150 for an 8×10)
-   as a rough guide — update or remove it in `src/app/about/page.tsx` if you'd
-   rather not publish numbers yet.
+   (`/about#commissions`, linked from the main nav) with the actual request
+   form (`CommissionForm`) embedded directly in it — subject, deadline,
+   budget, reference/inspiration, message. Inquiry-only — no deposit/payment
+   flow; Ariel handles that manually after the initial message. Includes a
+   soft pricing note ($110–$150 for an 8×10) as a rough guide — update or
+   remove it in `src/app/about/page.tsx` if you'd rather not publish numbers
+   yet. Gallery's "Inquire" (for pieces without a fixed price) uses a
+   pre-filled `mailto:` link instead of a form, since Contact no longer has one.
 7. ✅ Shopping cart — "Buy" on Shop and Gallery items now adds to a cart
    (persisted in `localStorage`, via `CartContext`) instead of checking out
    immediately. A cart icon in the header (with an item-count badge) opens a

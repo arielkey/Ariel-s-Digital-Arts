@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import PlaceholderArt from "./PlaceholderArt";
 import AddToCartButton from "./AddToCartButton";
 import type { ArtPiece } from "@/lib/types";
@@ -48,12 +47,16 @@ export default function ArtCard({ art }: { art: ArtPiece }) {
               variant="gold"
             />
           ) : canInquire ? (
-            <Link
-              href={`/contact?piece=${encodeURIComponent(art.id)}&title=${encodeURIComponent(art.title)}`}
+            <a
+              href={`mailto:executiveorganizeak@gmail.com?subject=${encodeURIComponent(
+                `Inquiry about "${art.title}"`
+              )}&body=${encodeURIComponent(
+                `Hi Ariel, I'm interested in "${art.title}" from your gallery. `
+              )}`}
               className="rounded-full bg-gold-400 px-4 py-1.5 text-sm font-medium text-ink-900 transition-colors hover:bg-gold-300"
             >
               Inquire
-            </Link>
+            </a>
           ) : (
             <span className="rounded-full bg-sage-100 px-4 py-1.5 text-sm font-medium text-sage-400">
               Sold
