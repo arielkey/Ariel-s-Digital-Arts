@@ -15,7 +15,7 @@ export default async function GalleryPage() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <div className="mb-10">
-        <h1 className="font-display text-3xl text-ink-900">Gallery</h1>
+        <h1 className="font-display text-3xl text-foreground">Gallery</h1>
         <p className="mt-3 max-w-xl text-foreground/70">
           Original, one-of-a-kind fantasy art pieces — each painted by hand,
           not printed on demand.

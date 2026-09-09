@@ -42,7 +42,7 @@ export default function CartDrawer() {
           <button
             onClick={close}
             aria-label="Close cart"
-            className="text-sage-700/60 hover:text-sage-800 cursor-pointer"
+            className="text-link/60 hover:text-sage-800 cursor-pointer"
           >
             <X className="h-5 w-5" />
           </button>
@@ -63,7 +63,7 @@ export default function CartDrawer() {
                     )}
                   </div>
                   <div className="flex flex-1 flex-col gap-1">
-                    <span className="text-sm font-medium text-ink-900">{item.title}</span>
+                    <span className="text-sm font-medium text-foreground">{item.title}</span>
                     <span className="text-sm text-foreground/60">${item.price.toFixed(2)}</span>
                     {item.type === "product" ? (
                       <div className="mt-1 flex items-center gap-2">
@@ -71,7 +71,7 @@ export default function CartDrawer() {
                           onClick={() => setQuantity(item.id, item.quantity - 1)}
                           disabled={item.quantity <= 1}
                           aria-label="Decrease quantity"
-                          className="rounded-full border border-sage-200 p-1 text-sage-700 disabled:opacity-40 cursor-pointer"
+                          className="rounded-full border border-sage-200 p-1 text-link disabled:opacity-40 cursor-pointer"
                         >
                           <Minus className="h-3 w-3" />
                         </button>
@@ -79,7 +79,7 @@ export default function CartDrawer() {
                         <button
                           onClick={() => setQuantity(item.id, item.quantity + 1)}
                           aria-label="Increase quantity"
-                          className="rounded-full border border-sage-200 p-1 text-sage-700 cursor-pointer"
+                          className="rounded-full border border-sage-200 p-1 text-link cursor-pointer"
                         >
                           <Plus className="h-3 w-3" />
                         </button>
@@ -105,7 +105,7 @@ export default function CartDrawer() {
 
         {items.length > 0 ? (
           <div className="border-t border-sage-200 px-5 py-4">
-            <div className="mb-3 flex items-center justify-between text-sm font-medium text-ink-900">
+            <div className="mb-3 flex items-center justify-between text-sm font-medium text-foreground">
               <span>Subtotal</span>
               <span>${subtotal.toFixed(2)}</span>
             </div>
@@ -113,7 +113,7 @@ export default function CartDrawer() {
             <button
               onClick={handleCheckout}
               disabled={loading}
-              className="w-full rounded-full bg-sage-600 px-4 py-2.5 text-sm font-medium text-cream-50 transition-colors hover:bg-sage-700 disabled:opacity-60 cursor-pointer"
+              className="w-full rounded-full bg-sage-600 px-4 py-2.5 text-sm font-medium text-mist-50 transition-colors hover:bg-sage-700 disabled:opacity-60 cursor-pointer"
             >
               {loading ? "Redirecting…" : "Checkout"}
             </button>

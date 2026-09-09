@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
 import TipJarButton from "./TipJarButton";
 import CartButton from "./CartButton";
+import ThemeToggle from "./ThemeToggle";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -34,7 +35,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-foreground/80 transition-colors hover:text-sage-700"
+              className="text-sm font-medium text-foreground/80 transition-colors hover:text-link"
             >
               {link.label}
             </Link>
@@ -42,6 +43,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-4">
+          <ThemeToggle />
           <CartButton />
           <TipJarButton />
           <button
@@ -61,7 +63,7 @@ export default function Header() {
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-sage-50 hover:text-sage-700"
+              className="rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-sage-50 hover:text-link"
             >
               {link.label}
             </Link>

@@ -31,8 +31,8 @@ export default async function Home() {
 
       <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="mb-8 flex items-end justify-between">
-          <h2 className="font-display text-2xl text-ink-900">Featured Original Art</h2>
-          <Link href="/gallery" className="text-sm font-medium text-sage-700 hover:text-sage-800">
+          <h2 className="font-display text-2xl text-foreground">Featured Original Art</h2>
+          <Link href="/gallery" className="text-sm font-medium text-link hover:text-sage-800">
             View gallery →
           </Link>
         </div>
@@ -47,8 +47,8 @@ export default async function Home() {
 
       <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="mb-8 flex items-end justify-between">
-          <h2 className="font-display text-2xl text-ink-900">From the Shop</h2>
-          <Link href="/shop" className="text-sm font-medium text-sage-700 hover:text-sage-800">
+          <h2 className="font-display text-2xl text-foreground">From the Shop</h2>
+          <Link href="/shop" className="text-sm font-medium text-link hover:text-sage-800">
             Shop all →
           </Link>
         </div>

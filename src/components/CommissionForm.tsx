@@ -71,7 +71,7 @@ export default function CommissionForm() {
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="rounded-lg border border-sage-200 bg-white px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
+            className="rounded-lg border border-sage-200 bg-cream-50 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
           />
         </label>
         <label className="flex flex-col gap-1.5 text-sm font-medium text-foreground/80">
@@ -81,7 +81,7 @@ export default function CommissionForm() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded-lg border border-sage-200 bg-white px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
+            className="rounded-lg border border-sage-200 bg-cream-50 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
           />
         </label>
       </div>
@@ -91,7 +91,7 @@ export default function CommissionForm() {
         <select
           value={reason}
           onChange={(e) => setReason(e.target.value)}
-          className="rounded-lg border border-sage-200 bg-white px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
+          className="rounded-lg border border-sage-200 bg-cream-50 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
         >
           {REASONS.map((r) => (
             <option key={r} value={r}>
@@ -110,7 +110,7 @@ export default function CommissionForm() {
               placeholder="e.g. a dragon portrait, a pet, a character"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="rounded-lg border border-sage-200 bg-white px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
+              className="rounded-lg border border-sage-200 bg-cream-50 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
             />
           </label>
           <label className="flex flex-col gap-1.5 text-sm font-medium text-foreground/80">
@@ -120,7 +120,7 @@ export default function CommissionForm() {
               placeholder="e.g. flexible, or a specific date"
               value={deadline}
               onChange={(e) => setDeadline(e.target.value)}
-              className="rounded-lg border border-sage-200 bg-white px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
+              className="rounded-lg border border-sage-200 bg-cream-50 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
             />
           </label>
           <label className="flex flex-col gap-1.5 text-sm font-medium text-foreground/80">
@@ -130,7 +130,7 @@ export default function CommissionForm() {
               placeholder="e.g. $100–150"
               value={budget}
               onChange={(e) => setBudget(e.target.value)}
-              className="rounded-lg border border-sage-200 bg-white px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
+              className="rounded-lg border border-sage-200 bg-cream-50 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
             />
           </label>
           <label className="flex flex-col gap-1.5 text-sm font-medium text-foreground/80">
@@ -140,7 +140,7 @@ export default function CommissionForm() {
               placeholder="link to an image, or describe it"
               value={reference}
               onChange={(e) => setReference(e.target.value)}
-              className="rounded-lg border border-sage-200 bg-white px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
+              className="rounded-lg border border-sage-200 bg-cream-50 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
             />
           </label>
         </div>
@@ -154,7 +154,7 @@ export default function CommissionForm() {
           placeholder="Tell me a bit more about what you have in mind."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="rounded-lg border border-sage-200 bg-white px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
+          className="rounded-lg border border-sage-200 bg-cream-50 px-3 py-2 text-sm focus:border-sage-500 focus:outline-none"
         />
       </label>
 

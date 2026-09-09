@@ -23,7 +23,7 @@ export default function AddToCartButton({
   const colors =
     variant === "gold"
       ? "bg-gold-400 text-ink-900 hover:bg-gold-300"
-      : "bg-sage-600 text-cream-50 hover:bg-sage-700";
+      : "bg-sage-600 text-mist-50 hover:bg-sage-700";
 
   return (
     <button

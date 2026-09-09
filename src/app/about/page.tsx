@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-      <h1 className="font-display text-3xl text-ink-900 sm:text-4xl">About Ariel</h1>
-      <p className="mt-3 text-lg text-sage-700">
+      <h1 className="font-display text-3xl text-foreground sm:text-4xl">About Ariel</h1>
+      <p className="mt-3 text-lg text-link">
         Digital paintings born from a lifelong love of fantasy.
       </p>
 
@@ -57,7 +57,7 @@ export default function AboutPage() {
         </Link>
         <Link
           href="/shop"
-          className="rounded-full bg-sage-600 px-6 py-3 text-sm font-medium text-cream-50 transition-colors hover:bg-sage-700"
+          className="rounded-full bg-sage-600 px-6 py-3 text-sm font-medium text-mist-50 transition-colors hover:bg-sage-700"
         >
           Shop Prints &amp; Apparel
         </Link>
@@ -65,9 +65,9 @@ export default function AboutPage() {
 
       <div
         id="commissions"
-        className="mt-20 scroll-mt-24 rounded-2xl border border-gold-200 bg-white p-6 sm:p-8"
+        className="mt-20 scroll-mt-24 rounded-2xl border border-gold-200 bg-cream-50 p-6 sm:p-8"
       >
-        <h2 className="font-display text-2xl text-ink-900">Custom Commissions</h2>
+        <h2 className="font-display text-2xl text-foreground">Custom Commissions</h2>
         <p className="mt-3 text-base leading-relaxed text-foreground/80">
           Want something made just for you? I take on a limited number of
           custom pieces — send me the details and I&apos;ll let you know if
@@ -75,7 +75,7 @@ export default function AboutPage() {
           together.
         </p>
 
-        <p className="mt-5 text-sm font-medium uppercase tracking-wide text-sage-700">
+        <p className="mt-5 text-sm font-medium uppercase tracking-wide text-link">
           When you reach out, include:
         </p>
         <ul className="mt-2 space-y-1.5 text-base text-foreground/80">

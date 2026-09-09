@@ -89,7 +89,7 @@ export default function FeedbackForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="self-start rounded-full bg-sage-600 px-6 py-2.5 text-sm font-medium text-cream-50 transition-colors hover:bg-sage-700 disabled:opacity-60 cursor-pointer"
+        className="self-start rounded-full bg-sage-600 px-6 py-2.5 text-sm font-medium text-mist-50 transition-colors hover:bg-sage-700 disabled:opacity-60 cursor-pointer"
       >
         {status === "loading" ? "Sending…" : "Send Feedback"}
       </button>

@@ -35,9 +35,48 @@
   --color-cream-200: #F3EDE0;
   --color-cream-300: #E9DFC9;
 
-  /* Deep ink for dark-fantasy contrast panels */
+  /* Deep ink for dark-fantasy contrast panels (fixed across themes — used
+     for the Hero's own always-dark background and for text sitting on
+     fixed-color gold buttons, not for general page text) */
   --color-ink-900: #1B1D16;
   --color-ink-800: #262920;
+
+  /* Accent link/label text — kept separate from sage-600/700 (which stay
+     fixed as button-background colors) so links can lighten independently
+     in dark mode. */
+  --color-link: #445837;
+
+  /* Fixed light neutrals for text/borders sitting on the Hero's own
+     always-dark panel — unlike cream-50/100 these never flip, since the
+     panel behind them never flips either. */
+  --color-mist-50: #FFFEFB;
+  --color-mist-100: #FAF7F0;
+}
+
+/* Dark theme overrides. Button backgrounds (sage-600/700, gold-300/400),
+   borders (sage-200, gold-200), and the Hero's own dark panel (ink-900/800,
+   sage-900) are deliberately left unchanged — a colored button or a light
+   accent border reads fine on either page background. What changes here is
+   large surface fills and plain text, so everything stays readable. */
+.dark {
+  --background: #1B1D16;
+  --foreground: #EDE8DC;
+
+  --color-cream-50: #262A1F;
+  --color-cream-100: #1B1D16;
+  --color-cream-200: #2E3327;
+  --color-cream-300: #3A402F;
+
+  --color-sage-50: #232B1C;
+  --color-sage-100: #2B3521;
+  --color-sage-800: #C4DFAE;
+
+  --color-gold-50: #2E2712;
+  --color-gold-100: #3A3018;
+  --color-gold-700: #E8C97A;
+  --color-gold-800: #F0D690;
+
+  --color-link: #9DC182;
 }
 
 @theme inline {
@@ -73,6 +112,11 @@
 
   --color-ink-900: var(--color-ink-900);
   --color-ink-800: var(--color-ink-800);
+
+  --color-link: var(--color-link);
+
+  --color-mist-50: var(--color-mist-50);
+  --color-mist-100: var(--color-mist-100);
 
   --font-sans: var(--font-body);
   --font-display: var(--font-display);

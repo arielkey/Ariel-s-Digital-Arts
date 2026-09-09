@@ -22,10 +22,10 @@ export default function Hero() {
         <span className="rounded-full border border-gold-300/40 px-4 py-1 text-xs uppercase tracking-widest text-gold-200">
           Original Fantasy Art &amp; Goods
         </span>
-        <h1 className="max-w-2xl font-display text-4xl leading-tight text-cream-50 sm:text-5xl md:text-6xl">
+        <h1 className="max-w-2xl font-display text-4xl leading-tight text-mist-50 sm:text-5xl md:text-6xl">
           Stories drawn from another realm
         </h1>
-        <p className="max-w-xl text-base text-cream-100/80 sm:text-lg">
+        <p className="max-w-xl text-base text-mist-100/80 sm:text-lg">
           I&apos;m Ariel — I paint dragons, keepers, and quiet magic, and turn them into
           original art, prints, and everyday things you&apos;ll love to carry with you.
         </p>
@@ -38,7 +38,7 @@ export default function Hero() {
           </Link>
           <Link
             href="/shop"
-            className="rounded-full border border-cream-100/40 px-6 py-3 text-sm font-medium text-cream-50 transition-colors hover:bg-cream-50/10"
+            className="rounded-full border border-mist-100/40 px-6 py-3 text-sm font-medium text-mist-50 transition-colors hover:bg-mist-50/10"
           >
             Shop Prints &amp; Apparel
           </Link>

@@ -31,8 +31,8 @@ export default function ShopGrid({ products }: { products: ShopProduct[] }) {
           onClick={() => setActive("all")}
           className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors cursor-pointer ${
             active === "all"
-              ? "bg-sage-600 text-cream-50"
-              : "bg-sage-50 text-sage-700 hover:bg-sage-100"
+              ? "bg-sage-600 text-mist-50"
+              : "bg-sage-50 text-link hover:bg-sage-100"
           }`}
         >
           All
@@ -43,8 +43,8 @@ export default function ShopGrid({ products }: { products: ShopProduct[] }) {
             onClick={() => setActive(category)}
             className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors cursor-pointer ${
               active === category
-                ? "bg-sage-600 text-cream-50"
-                : "bg-sage-50 text-sage-700 hover:bg-sage-100"
+                ? "bg-sage-600 text-mist-50"
+                : "bg-sage-50 text-link hover:bg-sage-100"
             }`}
           >
             {CATEGORY_LABELS[category]}

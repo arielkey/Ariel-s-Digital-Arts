@@ -8,7 +8,7 @@ export default function ArtCard({ art }: { art: ArtPiece }) {
   const canInquire = art.status === "inquire";
 
   return (
-    <div className="group flex flex-col overflow-hidden rounded-2xl border border-gold-200/60 bg-white transition-shadow hover:shadow-lg">
+    <div className="group flex flex-col overflow-hidden rounded-2xl border border-gold-200/60 bg-cream-50 transition-shadow hover:shadow-lg">
       <div className="relative aspect-[4/5] w-full overflow-hidden">
         {art.image ? (
           <Image
@@ -23,7 +23,7 @@ export default function ArtCard({ art }: { art: ArtPiece }) {
         )}
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
-        <h3 className="font-display text-base text-ink-900">{art.title}</h3>
+        <h3 className="font-display text-base text-foreground">{art.title}</h3>
         {art.description ? (
           <p className="text-sm text-foreground/60">{art.description}</p>
         ) : null}
