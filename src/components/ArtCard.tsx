@@ -44,7 +44,7 @@ export default function ArtCard({ art }: { art: ArtPiece }) {
             />
           ) : canInquire ? (
             <Link
-              href={`/contact?piece=${encodeURIComponent(art.id)}`}
+              href={`/contact?piece=${encodeURIComponent(art.id)}&title=${encodeURIComponent(art.title)}`}
               className="rounded-full bg-gold-400 px-4 py-1.5 text-sm font-medium text-ink-900 transition-colors hover:bg-gold-300"
             >
               Inquire

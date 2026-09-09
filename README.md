@@ -10,6 +10,7 @@ art, prints, apparel, and puzzles.
 - **Printful** — POD product catalog + order fulfillment
 - **Supabase** — original art gallery listings
 - **ConvertKit** — email list / free coloring page opt-in
+- **Resend** — contact form email delivery
 
 ## Getting started
 
@@ -38,8 +39,8 @@ src/
     page.tsx           Homepage
     shop/               Shop (Printful items) — live catalog + category filters
     gallery/            Gallery (original art) — live Supabase listings + buy/inquire
-    about/               About — stub, built out next
-    contact/             Contact — stub, built out next
+    about/               About — brand story
+    contact/             Contact — form (reads ?piece=&title= for gallery inquiries)
     api/
       checkout/tip/      Stripe Checkout session for the tip jar
       checkout/product/  Stripe Checkout session for a shop item
@@ -47,7 +48,9 @@ src/
       webhooks/stripe/   On payment: places the Printful fulfillment order, or
                          marks the matching art piece "sold" in Supabase
       newsletter/        ConvertKit signup proxy
-  components/            Header, Footer, Hero, ProductCard, ArtCard, BuyButton, ShopGrid, etc.
+      contact/           Sends contact form submissions via Resend
+  components/            Header, Footer, Hero, ProductCard, ArtCard, BuyButton, ShopGrid,
+                         ContactForm, etc.
   lib/
     types.ts             Shared Product / ArtPiece types
     placeholder-data.ts  Sample data used until Printful/Supabase are live
@@ -110,6 +113,26 @@ The Gallery page works today with sample data. To connect real pieces:
    `inquire` for an "Inquire" link to the Contact page, or `sold` to disable
    both.
 
+### Going live with the contact form
+
+The form works today, but shows a friendly "not connected yet" error until
+it's wired up:
+
+1. Create a free [Resend](https://resend.com) account, verify or skip
+   domain verification (their `onboarding@resend.dev` sender works without
+   one, fine for launch), and generate an API key.
+2. Add `RESEND_API_KEY` and `CONTACT_TO_EMAIL` (the inbox that should
+   receive messages) to `.env.local` (and Vercel's Environment Variables
+   once ready).
+3. Once you have a custom domain verified in Resend, update the `from`
+   address in `src/app/api/contact/route.ts` to something like
+   `Ariel's Digital Arts <hello@arielsdigitalarts.com>` — using your own
+   domain instead of `onboarding@resend.dev` looks more professional and
+   avoids spam folders.
+
+Replying to a contact email goes straight back to the sender — the route
+sets `reply_to` to their address automatically.
+
 ### Testing checkout locally with the Stripe CLI
 
 A portable `stripe.exe` is set up at `C:\Users\execu\bin\stripe.exe`
@@ -138,8 +161,9 @@ from a real webhook endpoint in the Stripe dashboard once deployed.
 2. ✅ Shop page — live Printful catalog, category filters, Stripe checkout, auto-fulfillment webhook
 3. ✅ Gallery page — Supabase-backed original art listings, buy/inquire flow (Supabase not yet connected — placeholder pieces)
 4. ✅ About page — brand story
-5. Contact page — form + email delivery
-6. Polish, SEO, analytics
+5. ✅ Contact page — form + email delivery via Resend (not yet connected — see below)
+6. Custom commissions — a way for customers to request/start a commission (planned, not yet scoped)
+7. Polish, SEO, analytics
 
 ## Deploying
 
