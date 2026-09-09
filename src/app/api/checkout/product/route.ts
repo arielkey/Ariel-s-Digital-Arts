@@ -27,10 +27,10 @@ export async function POST(req: NextRequest) {
     if (!live) {
       return NextResponse.json({ error: "That item is no longer available." }, { status: 404 });
     }
-    title = live.sync_variant.name;
-    unitAmount = Math.round(Number(live.sync_variant.retail_price) * 100);
-    currency = live.sync_variant.currency.toLowerCase();
-    image = live.sync_variant.product?.image;
+    title = live.name;
+    unitAmount = Math.round(Number(live.retail_price) * 100);
+    currency = live.currency.toLowerCase();
+    image = live.product?.image;
   } else {
     const product = placeholderProducts.find((p) => p.id === productId);
     if (!product) {

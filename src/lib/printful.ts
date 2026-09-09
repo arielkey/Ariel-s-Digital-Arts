@@ -115,7 +115,7 @@ export async function getPrintfulVariant(syncVariantId: number) {
   });
   if (!res.ok) return null;
   const json = await res.json();
-  return json.result as { sync_variant: PrintfulSyncVariant };
+  return json.result as PrintfulSyncVariant;
 }
 
 interface PrintfulOrderRecipient {
