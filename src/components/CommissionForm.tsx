@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 
-const REASONS = ["Custom Commission", "General Inquiry", "Order Question", "Other"];
+const REASONS = [
+  "Custom Commission",
+  "General Inquiry",
+  "Order Question",
+  "Comment / Suggestion / Complaint",
+  "Other",
+];
 
 export default function CommissionForm() {
   const [name, setName] = useState("");
