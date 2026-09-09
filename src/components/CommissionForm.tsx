@@ -2,20 +2,12 @@
 
 import { useState } from "react";
 
-const REASONS = [
-  "Custom Commission",
-  "General Inquiry",
-  "Order Question",
-  "Comment / Suggestion / Complaint",
-  "Other",
-];
+const REASONS = ["Custom Commission", "General Inquiry", "Order Question", "Other"];
 
-export default function CommissionForm({ initialReason }: { initialReason?: string }) {
+export default function CommissionForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [reason, setReason] = useState(
-    initialReason && REASONS.includes(initialReason) ? initialReason : REASONS[0]
-  );
+  const [reason, setReason] = useState(REASONS[0]);
   const [subject, setSubject] = useState("");
   const [deadline, setDeadline] = useState("");
   const [budget, setBudget] = useState("");

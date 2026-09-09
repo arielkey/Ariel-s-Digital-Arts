@@ -8,13 +8,7 @@ export const metadata: Metadata = {
     "The story behind Ariel's Digital Arts — original fantasy art inspired by dragons, made with a stickler's eye for detail.",
 };
 
-export default async function AboutPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ reason?: string }>;
-}) {
-  const { reason } = await searchParams;
-
+export default function AboutPage() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
       <h1 className="font-display text-3xl text-ink-900 sm:text-4xl">About Ariel</h1>
@@ -98,7 +92,7 @@ export default async function AboutPage({
         </p>
 
         <div className="mt-8 border-t border-gold-200 pt-8">
-          <CommissionForm initialReason={reason} />
+          <CommissionForm />
         </div>
       </div>
     </section>

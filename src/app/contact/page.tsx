@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Mail } from "lucide-react";
 import { InstagramIcon, TikTokIcon } from "@/components/SocialIcons";
+import FeedbackForm from "@/components/FeedbackForm";
 
 export const metadata: Metadata = {
   title: "Contact | Ariel's Digital Arts",
@@ -52,16 +53,17 @@ export default function ContactPage() {
         section instead.
       </p>
 
-      <p className="mt-2 text-sm text-foreground/60">
-        Have feedback, a suggestion, or a complaint?{" "}
-        <a
-          href="/about?reason=Comment+%2F+Suggestion+%2F+Complaint#commissions"
-          className="font-medium text-sage-700 underline hover:text-sage-800"
-        >
-          Let me know here
-        </a>
-        .
-      </p>
+      <div className="mt-16 rounded-2xl border border-sage-200 bg-white p-6 text-left sm:p-8">
+        <h2 className="font-display text-xl text-ink-900">
+          Have feedback, a suggestion, or a complaint?
+        </h2>
+        <p className="mt-2 text-sm text-foreground/70">
+          Let me know here — I read every message.
+        </p>
+        <div className="mt-6">
+          <FeedbackForm />
+        </div>
+      </div>
     </section>
   );
 }

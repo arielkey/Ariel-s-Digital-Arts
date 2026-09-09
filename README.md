@@ -41,8 +41,10 @@ src/
     gallery/            Gallery (original art) — live Supabase listings + buy/inquire
     about/               About — brand story + Commissions section (the
                          commission request form lives here, at #commissions)
-    contact/             Contact — just email + social links, points to
-                         Commissions for custom work
+    contact/             Contact — email + social links, a pointer to
+                         Commissions for custom work, and its own standalone
+                         feedback form (FeedbackForm) for comments/suggestions/
+                         complaints
     api/
       checkout/tip/      Stripe Checkout session for the tip jar
       checkout/cart/     Stripe Checkout session for the whole cart (shop
@@ -50,9 +52,9 @@ src/
       webhooks/stripe/   On payment: places one combined Printful fulfillment
                          order for all shop items, and marks any purchased
                          art pieces "sold" in Supabase
-      contact/           Sends commission requests via Resend
+      contact/           Sends commission requests and feedback via Resend
   components/            Header, Footer, Hero, ProductCard, ArtCard, ShopGrid,
-                         KitEmbedForm, CommissionForm, SocialIcons,
+                         KitEmbedForm, CommissionForm, FeedbackForm, SocialIcons,
                          CartContext, CartDrawer, CartButton, AddToCartButton, etc.
   lib/
     types.ts             Shared Product / ArtPiece types
