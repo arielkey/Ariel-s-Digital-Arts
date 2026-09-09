@@ -161,7 +161,10 @@ from a real webhook endpoint in the Stripe dashboard once deployed.
 2. ✅ Shop page — live Printful catalog, category filters, Stripe checkout, auto-fulfillment webhook
 3. ✅ Gallery page — Supabase-backed original art listings, buy/inquire flow (Supabase not yet connected — placeholder pieces)
 4. ✅ About page — brand story
-5. ✅ Contact page — form + email delivery via Resend (not yet connected — see below)
+5. ✅ Contact page — form + email delivery via Resend, connected and
+   verified live in production (delivers to `CONTACT_TO_EMAIL`, sender is
+   currently Resend's shared `onboarding@resend.dev` until a custom domain
+   is verified — see "Going live with the contact form" below)
 6. ✅ Custom commissions — a "Custom Commissions" section on the About page
    (`/about#commissions`, linked from the main nav), with a "Request a
    Commission" button that pre-fills the Contact form's reason and reveals
@@ -177,13 +180,16 @@ from a real webhook endpoint in the Stripe dashboard once deployed.
 **Live at [ariel-s-digital-arts.vercel.app](https://ariel-s-digital-arts.vercel.app)**,
 deployed via Vercel's GitHub integration (auto-deploys on every push to
 `main`). Production has `STRIPE_SECRET_KEY` (live), `STRIPE_WEBHOOK_SECRET`,
-`PRINTFUL_API_KEY`, and `PRINTFUL_STORE_ID` set in Vercel's Environment
-Variables — **the live Stripe key is active, so checkout processes real
-payments.** Supabase and ConvertKit variables aren't set yet, so Gallery and
-the newsletter forms still run on placeholder/disabled behavior in
-production too. A live-mode Stripe webhook is configured pointing at
-`/api/webhooks/stripe`, verified reachable (returns 400 on an unsigned
-request, confirming the route and secret are live).
+`PRINTFUL_API_KEY`, `PRINTFUL_STORE_ID`, `RESEND_API_KEY`, and
+`CONTACT_TO_EMAIL` set in Vercel's Environment Variables — **the live Stripe
+key is active, so checkout processes real payments**, and the contact form
+sends real emails (verified end-to-end in production: a live POST to
+`/api/contact` returned `200` and the test message was received). Supabase
+and ConvertKit variables aren't set yet, so Gallery and the newsletter forms
+still run on placeholder/disabled behavior in production too. A live-mode
+Stripe webhook is configured pointing at `/api/webhooks/stripe`, verified
+reachable (returns 400 on an unsigned request, confirming the route and
+secret are live).
 
 Adding new env vars later: Vercel project → Settings → Environment
 Variables → Add, then redeploy (Deployments tab → latest → "..." →
