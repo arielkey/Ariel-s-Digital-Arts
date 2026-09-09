@@ -193,12 +193,15 @@ from a real webhook endpoint in the Stripe dashboard once deployed.
    `onboarding@resend.dev` until a custom domain is verified — see "Going
    live with the contact form" below)
 6. ✅ Custom commissions — a "Custom Commissions" section on the About page
-   (`/about#commissions`, linked from the main nav) with the actual request
-   form (`CommissionForm`) embedded directly in it — subject, deadline,
-   budget, reference/inspiration, message. Inquiry-only — no deposit/payment
-   flow; Ariel handles that manually after the initial message. Includes a
-   soft pricing note ($110–$150 for an 8×10) as a rough guide — update or
-   remove it in `src/app/about/page.tsx` if you'd rather not publish numbers
+   (`/about#commissions`, linked from the main nav) with the site's one
+   form (`CommissionForm`) embedded directly in it: name, email, reason
+   (Custom Commission / General Inquiry / Order Question / Other), and —
+   only when reason is Custom Commission — subject, deadline, budget range,
+   and reference/inspiration, plus message. Inquiry-only — no
+   deposit/payment flow; Ariel handles that manually after the initial
+   message. Includes a soft pricing note ($110–$150 for an 8×10) as a rough
+   guide — update or remove it in `src/app/about/page.tsx` if you'd rather
+   not publish numbers
    yet. Gallery's "Inquire" (for pieces without a fixed price) uses a
    pre-filled `mailto:` link instead of a form, since Contact no longer has one.
 7. ✅ Shopping cart — "Buy" on Shop and Gallery items now adds to a cart
