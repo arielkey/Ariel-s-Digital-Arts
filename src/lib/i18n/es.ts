@@ -32,9 +32,9 @@ const es: Dictionary = {
     shopAll: "Ver toda la tienda →",
   },
   coloringBanner: {
-    heading: "Recibe un fondo de pantalla gratis para tu computadora y celular",
+    heading: "Recibe un fondo de pantalla gratis para tu computadora",
     description:
-      "Únete a la lista y te enviaré un fondo de pantalla gratuito para computadora y celular de mi colección de arte fantástico, además de ser la primera persona en ver piezas nuevas y lanzamientos.",
+      "Únete a la lista y te enviaré un fondo de pantalla gratuito para computadora de mi colección de arte fantástico, además de ser la primera persona en ver piezas nuevas y lanzamientos.",
   },
   footer: {
     tagline: "Arte fantástico original, impresiones y ropa — historias dibujadas a mano, cobrando vida.",
