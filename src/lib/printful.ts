@@ -69,6 +69,20 @@ async function printfulFetch<T>(path: string): Promise<T | null> {
 }
 
 /**
+ * Manual overrides for products where Printful's own store thumbnail
+ * doesn't represent the design well — e.g. a mug thumbnail cropped to an
+ * angle where the print barely shows, or a product whose art is on the
+ * back but the thumbnail is a blank front view. Keyed by sync_product id.
+ */
+const IMAGE_OVERRIDES: Record<number, string> = {
+  468507476: "https://files.cdn.printful.com/files/f54/f542fa0b566984d7994d7e9b980bdc83_preview.png", // Mombie Mug
+  468506651:
+    "https://files.cdn.printful.com/printfile-preview/1035291759/547a3c45f423e45473e1bbf578cd65fd_preview.png", // Cardboard Crack premium heavyweight tee (back design)
+  468506669:
+    "https://files.cdn.printful.com/printfile-preview/1035291759/547a3c45f423e45473e1bbf578cd65fd_preview.png", // Cardboard Crack Unisex Hoodie (back design)
+};
+
+/**
  * Fetches the live Printful store catalog, using each product's first
  * variant as the buyable item. Returns null if Printful isn't configured
  * (missing PRINTFUL_API_KEY) or the request fails, so callers can fall
@@ -92,7 +106,7 @@ export async function getPrintfulProducts(): Promise<ShopProduct[] | null> {
       title: detail.sync_product.name,
       price: Number(variant.retail_price),
       currency: variant.currency,
-      image: detail.sync_product.thumbnail_url,
+      image: IMAGE_OVERRIDES[detail.sync_product.id] ?? detail.sync_product.thumbnail_url,
       category: guessCategory(detail.sync_product.name),
       printfulVariantId: variant.id,
       href: `/shop#${variant.id}`,
