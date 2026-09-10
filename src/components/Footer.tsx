@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 import Logo from "./Logo";
 import KitEmbedForm from "./KitEmbedForm";
-import { InstagramIcon, TikTokIcon } from "./SocialIcons";
+import { InstagramIcon, TikTokIcon, PinterestIcon, FacebookIcon } from "./SocialIcons";
 import { useLanguage } from "./LanguageProvider";
 
 export default function Footer() {
@@ -46,6 +46,24 @@ export default function Footer() {
               className="text-mist-100/70 transition-colors hover:text-gold-300"
             >
               <TikTokIcon className="h-5 w-5" />
+            </a>
+            <a
+              href="https://pinterest.com/arielsdigitalarts"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Pinterest"
+              className="text-mist-100/70 transition-colors hover:text-gold-300"
+            >
+              <PinterestIcon className="h-5 w-5" />
+            </a>
+            <a
+              href="https://facebook.com/arielsdigitalarts"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="text-mist-100/70 transition-colors hover:text-gold-300"
+            >
+              <FacebookIcon className="h-5 w-5" />
             </a>
           </div>
         </div>

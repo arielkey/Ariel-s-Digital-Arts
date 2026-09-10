@@ -1,7 +1,7 @@
 "use client";
 
 import { Mail } from "lucide-react";
-import { InstagramIcon, TikTokIcon } from "./SocialIcons";
+import { InstagramIcon, TikTokIcon, PinterestIcon, FacebookIcon } from "./SocialIcons";
 import FeedbackForm from "./FeedbackForm";
 import { useLanguage } from "./LanguageProvider";
 
@@ -39,6 +39,24 @@ export default function ContactPageContent() {
           className="text-link transition-colors hover:text-sage-800"
         >
           <TikTokIcon className="h-7 w-7" />
+        </a>
+        <a
+          href="https://pinterest.com/arielsdigitalarts"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Pinterest"
+          className="text-link transition-colors hover:text-sage-800"
+        >
+          <PinterestIcon className="h-7 w-7" />
+        </a>
+        <a
+          href="https://facebook.com/arielsdigitalarts"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+          className="text-link transition-colors hover:text-sage-800"
+        >
+          <FacebookIcon className="h-7 w-7" />
         </a>
       </div>
 
