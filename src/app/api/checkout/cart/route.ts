@@ -3,7 +3,59 @@ import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { getPrintfulVariant, isPrintfulConfigured } from "@/lib/printful";
 import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/auth/server";
 import { shopProducts as placeholderProducts, featuredArt as placeholderArt } from "@/lib/placeholder-data";
+import type { Profile } from "@/lib/types";
+
+/**
+ * For a signed-in shopper, returns a Stripe Customer id carrying their
+ * saved shipping address (if any) so Checkout pre-fills it. Returns null
+ * for guests, or if Supabase/Stripe aren't fully wired up.
+ */
+async function getOrCreateStripeCustomer(): Promise<string | null> {
+  if (!stripe) return null;
+
+  const authClient = await createClient();
+  const {
+    data: { user },
+  } = await authClient.auth.getUser();
+  if (!user) return null;
+
+  const { data: profile } = await authClient
+    .from("profiles")
+    .select("*")
+    .eq("id", user.id)
+    .single<Profile>();
+
+  let customerId = profile?.stripe_customer_id ?? null;
+  if (!customerId) {
+    const customer = await stripe.customers.create({
+      email: user.email ?? undefined,
+      name: profile?.full_name ?? undefined,
+    });
+    customerId = customer.id;
+    await authClient.from("profiles").upsert({ id: user.id, email: user.email, stripe_customer_id: customerId });
+  }
+
+  if (profile?.shipping_address1 && profile.shipping_city && profile.shipping_zip) {
+    await stripe.customers.update(customerId, {
+      name: profile.full_name ?? undefined,
+      shipping: {
+        name: profile.full_name ?? user.email ?? "",
+        address: {
+          line1: profile.shipping_address1,
+          line2: profile.shipping_address2 ?? undefined,
+          city: profile.shipping_city,
+          state: profile.shipping_state ?? undefined,
+          postal_code: profile.shipping_zip,
+          country: profile.shipping_country ?? "US",
+        },
+      },
+    });
+  }
+
+  return customerId;
+}
 
 interface CartRequestItem {
   id: string;
@@ -106,11 +158,15 @@ export async function POST(req: NextRequest) {
   }
 
   const origin = req.headers.get("origin") ?? req.nextUrl.origin;
+  const customerId = await getOrCreateStripeCustomer();
 
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     line_items: lineItems,
     shipping_address_collection: { allowed_countries: ["US", "CA"] },
+    ...(customerId
+      ? { customer: customerId, customer_update: { shipping: "auto" } }
+      : {}),
     metadata: {
       printfulItems: JSON.stringify(printfulItems),
       artPieceIds: JSON.stringify(artPieceIds),

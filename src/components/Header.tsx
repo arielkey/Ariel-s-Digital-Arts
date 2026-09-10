@@ -8,6 +8,7 @@ import TipJarButton from "./TipJarButton";
 import CartButton from "./CartButton";
 import ThemeToggle from "./ThemeToggle";
 import LanguageToggle from "./LanguageToggle";
+import AccountLink from "./AccountLink";
 import { useLanguage } from "./LanguageProvider";
 
 const NAV_LINKS = [
@@ -49,11 +50,14 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2 sm:gap-4">
-          <LanguageToggle />
-          <ThemeToggle />
+        <div className="flex shrink-0 items-center gap-3 sm:gap-4">
+          <div className="hidden items-center gap-4 md:flex">
+            <LanguageToggle />
+            <ThemeToggle />
+            <AccountLink />
+            <TipJarButton />
+          </div>
           <CartButton />
-          <TipJarButton />
           <button
             className="text-sage-800 md:hidden cursor-pointer"
             aria-label={t("common.toggleMenu")}
@@ -76,6 +80,12 @@ export default function Header() {
               {t(link.key)}
             </Link>
           ))}
+          <div className="mt-2 flex items-center gap-4 border-t border-sage-200/60 px-3 pt-4">
+            <LanguageToggle />
+            <ThemeToggle />
+            <AccountLink />
+            <TipJarButton />
+          </div>
         </nav>
       ) : null}
     </header>

@@ -43,20 +43,21 @@ export async function POST(req: NextRequest) {
       console.error("Malformed cart metadata on session", session.id);
     }
 
-    if (printfulItems.length > 0) {
-      const shipping = session.collected_information?.shipping_details;
-      const address = shipping?.address;
+    const shipping = session.collected_information?.shipping_details;
+    const address = shipping?.address;
+    const hasShipping = shipping?.name && address?.line1 && address.city && address.country && address.postal_code;
 
-      if (shipping?.name && address?.line1 && address.city && address.country && address.postal_code) {
+    if (printfulItems.length > 0) {
+      if (hasShipping && shipping && address) {
         try {
           await createPrintfulOrder(printfulItems, {
-            name: shipping.name,
-            address1: address.line1,
+            name: shipping.name!,
+            address1: address.line1!,
             address2: address.line2 ?? undefined,
-            city: address.city,
+            city: address.city!,
             state_code: address.state ?? undefined,
-            country_code: address.country,
-            zip: address.postal_code,
+            country_code: address.country!,
+            zip: address.postal_code!,
             email: session.customer_details?.email ?? undefined,
           });
         } catch (err) {
@@ -64,6 +65,27 @@ export async function POST(req: NextRequest) {
         }
       } else {
         console.error("Checkout session missing shipping details", session.id);
+      }
+    }
+
+    // Save the shipping address back to the shopper's profile (if they're
+    // signed in) so their next checkout is pre-filled without them having
+    // to enter it on the account page first.
+    if (hasShipping && shipping && address && typeof session.customer === "string" && supabaseAdmin) {
+      const { error } = await supabaseAdmin
+        .from("profiles")
+        .update({
+          full_name: shipping.name,
+          shipping_address1: address.line1,
+          shipping_address2: address.line2 ?? null,
+          shipping_city: address.city,
+          shipping_state: address.state ?? null,
+          shipping_zip: address.postal_code,
+          shipping_country: address.country,
+        })
+        .eq("stripe_customer_id", session.customer);
+      if (error) {
+        console.error("Failed to save shipping address to profile for session", session.id, error.message);
       }
     }
 

@@ -34,3 +34,17 @@ export interface CartItem {
   image: string;
   quantity: number;
 }
+
+/** A signed-in user's saved shipping address, used to pre-fill Stripe Checkout. */
+export interface Profile {
+  id: string;
+  email: string | null;
+  full_name: string | null;
+  stripe_customer_id: string | null;
+  shipping_address1: string | null;
+  shipping_address2: string | null;
+  shipping_city: string | null;
+  shipping_state: string | null;
+  shipping_zip: string | null;
+  shipping_country: string | null;
+}
