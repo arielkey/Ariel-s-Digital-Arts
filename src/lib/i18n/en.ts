@@ -32,9 +32,9 @@ const en: Dictionary = {
     shopAll: "Shop all →",
   },
   coloringBanner: {
-    heading: "Get a free coloring page",
+    heading: "Get a free desktop & phone wallpaper",
     description:
-      "Join the list and I'll send you a free printable coloring page from my fantasy art collection, plus first look at new pieces and drops.",
+      "Join the list and I'll send you a free desktop and phone wallpaper from my fantasy art collection, plus first look at new pieces and drops.",
   },
   footer: {
     tagline: "Original fantasy art, prints, and apparel — hand-drawn stories brought to life.",
