@@ -13,14 +13,14 @@ export default function ArtCard({ art }: { art: ArtPiece }) {
 
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl border border-gold-200/60 bg-cream-50 transition-shadow hover:shadow-lg">
-      <div className="relative aspect-[4/5] w-full overflow-hidden">
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-cream-100">
         {art.image ? (
           <Image
             src={art.image}
             alt={art.title}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover"
+            className="object-contain"
           />
         ) : (
           <PlaceholderArt label={art.title} className="h-full w-full" />
