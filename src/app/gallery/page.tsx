@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   title: "Gallery | Ariel's Digital Arts",
 };
 
+// Refetch art pieces periodically instead of only at build time, so
+// adding/editing/selling a piece in Supabase shows up without a redeploy.
+export const revalidate = 300;
+
 export default async function GalleryPage() {
   const liveArt = await getArtPieces();
   const art = liveArt ?? placeholderArt;

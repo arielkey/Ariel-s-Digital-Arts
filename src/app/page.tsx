@@ -8,6 +8,11 @@ import { getArtPieces } from "@/lib/gallery";
 import { getPrintfulProducts } from "@/lib/printful";
 import { featuredArt as placeholderArt, featuredProducts as placeholderProducts } from "@/lib/placeholder-data";
 
+// Refetch featured art/products periodically instead of only at build
+// time, so adding/editing/selling a piece in Supabase shows up without a
+// redeploy.
+export const revalidate = 300;
+
 export default async function Home() {
   const [liveArt, liveProducts] = await Promise.all([getArtPieces(), getPrintfulProducts()]);
   const featuredArt = (liveArt ?? placeholderArt).slice(0, 2);
