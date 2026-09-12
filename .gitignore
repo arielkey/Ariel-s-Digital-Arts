@@ -37,6 +37,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# personal staging folder for source art photos — not part of the site
+# itself; images get copied into public/gallery/ when a piece is added
+/Art for sale/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
