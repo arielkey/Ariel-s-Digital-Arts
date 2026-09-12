@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useLanguage } from "./LanguageProvider";
 
 const EMBED_SRC = "https://ariel-s-digital-arts.kit.com/f5cc99f86b/index.js";
 const EMBED_UID = "f5cc99f86b";
@@ -19,6 +20,7 @@ const EMBED_UID = "f5cc99f86b";
  * dedupes <Script> tags by src and wouldn't re-execute it otherwise.
  */
 export default function KitEmbedForm() {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,5 +38,10 @@ export default function KitEmbedForm() {
     };
   }, []);
 
-  return <div ref={containerRef} className="w-full min-w-0 max-w-md" />;
+  return (
+    <div className="w-full min-w-0 max-w-md">
+      <div ref={containerRef} />
+      <p className="mt-2 text-xs text-mist-100/60">{t("coloringBanner.spamNote")}</p>
+    </div>
+  );
 }

@@ -35,6 +35,8 @@ const en: Dictionary = {
     heading: "Get a free desktop wallpaper",
     description:
       "Join the list and I'll send you a free desktop wallpaper from my fantasy art collection, plus first look at new pieces and drops.",
+    spamNote:
+      "Don't see the confirmation email in a minute? Check your spam/junk folder and mark it \"Not Spam\" so it reaches your inbox.",
   },
   footer: {
     tagline: "Original fantasy art, prints, and apparel — hand-drawn stories brought to life.",

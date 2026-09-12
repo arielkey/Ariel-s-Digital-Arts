@@ -35,6 +35,8 @@ const es: Dictionary = {
     heading: "Recibe un fondo de pantalla gratis para tu computadora",
     description:
       "Únete a la lista y te enviaré un fondo de pantalla gratuito para computadora de mi colección de arte fantástico, además de ser la primera persona en ver piezas nuevas y lanzamientos.",
+    spamNote:
+      "¿No ves el correo de confirmación en un minuto? Revisa tu carpeta de spam/correo no deseado y marca \"No es spam\" para que llegue a tu bandeja de entrada.",
   },
   footer: {
     tagline: "Arte fantástico original, impresiones y ropa — historias dibujadas a mano, cobrando vida.",
