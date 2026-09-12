@@ -5,6 +5,7 @@ import { getPrintfulVariant, isPrintfulConfigured } from "@/lib/printful";
 import { supabase } from "@/lib/supabase";
 import { createClient } from "@/lib/auth/server";
 import { shopProducts as placeholderProducts, featuredArt as placeholderArt } from "@/lib/placeholder-data";
+import { SHOP_SHIPPING_CENTS, getArtShippingCents } from "@/lib/shipping";
 import type { Profile } from "@/lib/types";
 
 /**
@@ -79,6 +80,8 @@ export async function POST(req: NextRequest) {
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
   const printfulItems: { variantId: number; quantity: number }[] = [];
   const artPieceIds: string[] = [];
+  let hasShopItem = false;
+  let artShippingCents = 0;
 
   for (const item of items) {
     const quantity = Math.max(1, Math.min(item.quantity, 20));
@@ -118,24 +121,33 @@ export async function POST(req: NextRequest) {
         quantity,
       });
       if (variantId !== null) printfulItems.push({ variantId, quantity });
+      hasShopItem = true;
     } else {
       let title: string;
       let unitAmount: number;
       let image: string | undefined;
+      let longestSideInches: number | undefined;
 
-      if (supabase) {
-        const { data: piece } = await supabase
-          .from("art_pieces")
-          .select("title, price, image, status")
-          .eq("id", item.id)
-          .single();
-        if (!piece || piece.status !== "available" || !piece.price) {
+      const { data: livePiece, error: supabaseError } = supabase
+        ? await supabase
+            .from("art_pieces")
+            .select("title, price, image, status, longest_side_inches")
+            .eq("id", item.id)
+            .single()
+        : { data: null, error: null };
+
+      if (livePiece && !supabaseError) {
+        if (livePiece.status !== "available" || !livePiece.price) {
           return NextResponse.json({ error: `An item in your cart is no longer available.` }, { status: 404 });
         }
-        title = piece.title;
-        unitAmount = Math.round(piece.price * 100);
-        image = piece.image || undefined;
+        title = livePiece.title;
+        unitAmount = Math.round(livePiece.price * 100);
+        image = livePiece.image || undefined;
+        longestSideInches = livePiece.longest_side_inches ?? undefined;
       } else {
+        // Falls back to placeholder data if Supabase isn't configured, or
+        // the art_pieces table doesn't exist yet — same fallback the
+        // Gallery page uses, so checkout keeps working either way.
         const piece = placeholderArt.find((p) => p.id === item.id);
         if (!piece || piece.status !== "available" || !piece.price) {
           return NextResponse.json({ error: `An item in your cart is no longer available.` }, { status: 404 });
@@ -143,7 +155,10 @@ export async function POST(req: NextRequest) {
         title = piece.title;
         unitAmount = Math.round(piece.price * 100);
         image = piece.image || undefined;
+        longestSideInches = piece.longestSideInches;
       }
+
+      artShippingCents += getArtShippingCents(longestSideInches);
 
       lineItems.push({
         price_data: {
@@ -160,10 +175,21 @@ export async function POST(req: NextRequest) {
   const origin = req.headers.get("origin") ?? req.nextUrl.origin;
   const customerId = await getOrCreateStripeCustomer();
 
+  const shippingCents = (hasShopItem ? SHOP_SHIPPING_CENTS : 0) + artShippingCents;
+
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     line_items: lineItems,
     shipping_address_collection: { allowed_countries: ["US", "CA"] },
+    shipping_options: [
+      {
+        shipping_rate_data: {
+          type: "fixed_amount",
+          fixed_amount: { amount: shippingCents, currency: "usd" },
+          display_name: "Shipping",
+        },
+      },
+    ],
     ...(customerId
       ? { customer: customerId, customer_update: { shipping: "auto" } }
       : {}),

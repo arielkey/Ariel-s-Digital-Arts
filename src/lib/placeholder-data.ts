@@ -68,6 +68,7 @@ export const featuredArt: ArtPiece[] = [
     currency: "USD",
     status: "available",
     href: "/gallery",
+    longestSideInches: 14,
   },
   {
     id: "art-emberwing",
@@ -76,5 +77,6 @@ export const featuredArt: ArtPiece[] = [
     image: "",
     status: "inquire",
     href: "/gallery",
+    longestSideInches: 20,
   },
 ];

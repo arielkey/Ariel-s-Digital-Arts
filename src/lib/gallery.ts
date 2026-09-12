@@ -9,6 +9,7 @@ interface ArtPieceRow {
   price: number | null;
   currency: string;
   status: "available" | "sold" | "inquire";
+  longest_side_inches: number | null;
 }
 
 /**
@@ -21,7 +22,7 @@ export async function getArtPieces(): Promise<ArtPiece[] | null> {
 
   const { data, error } = await supabase
     .from("art_pieces")
-    .select("id, title, description, image, price, currency, status")
+    .select("id, title, description, image, price, currency, status, longest_side_inches")
     .order("created_at", { ascending: false });
 
   if (error || !data) {
@@ -38,5 +39,6 @@ export async function getArtPieces(): Promise<ArtPiece[] | null> {
     currency: row.currency,
     status: row.status,
     href: `/gallery#${row.id}`,
+    longestSideInches: row.longest_side_inches ?? undefined,
   }));
 }

@@ -23,6 +23,8 @@ export interface ArtPiece {
   currency?: string;
   status: "available" | "sold" | "inquire";
   href: string;
+  /** Longest side of the canvas in inches — used to pick a flat shipping rate tier. */
+  longestSideInches?: number;
 }
 
 /** A line in the shopping cart — either a shop product or a one-off art piece. */
