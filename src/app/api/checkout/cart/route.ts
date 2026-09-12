@@ -77,6 +77,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Your cart is empty." }, { status: 400 });
   }
 
+  const origin = req.headers.get("origin") ?? req.nextUrl.origin;
+  /** Stripe requires absolute image URLs — locally-hosted art photos are stored as site-relative paths. */
+  const toAbsoluteUrl = (url: string) => (url.startsWith("http") ? url : `${origin}${url}`);
+
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
   const printfulItems: { variantId: number; quantity: number }[] = [];
   const artPieceIds: string[] = [];
@@ -142,7 +146,7 @@ export async function POST(req: NextRequest) {
         }
         title = livePiece.title;
         unitAmount = Math.round(livePiece.price * 100);
-        image = livePiece.image || undefined;
+        image = livePiece.image ? toAbsoluteUrl(livePiece.image) : undefined;
         longestSideInches = livePiece.longest_side_inches ?? undefined;
       } else {
         // Falls back to placeholder data if Supabase isn't configured, or
@@ -172,34 +176,39 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  const origin = req.headers.get("origin") ?? req.nextUrl.origin;
   const customerId = await getOrCreateStripeCustomer();
 
   const shippingCents = (hasShopItem ? SHOP_SHIPPING_CENTS : 0) + artShippingCents;
 
-  const session = await stripe.checkout.sessions.create({
-    mode: "payment",
-    line_items: lineItems,
-    shipping_address_collection: { allowed_countries: ["US", "CA"] },
-    shipping_options: [
-      {
-        shipping_rate_data: {
-          type: "fixed_amount",
-          fixed_amount: { amount: shippingCents, currency: "usd" },
-          display_name: "Shipping",
+  try {
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      line_items: lineItems,
+      shipping_address_collection: { allowed_countries: ["US", "CA"] },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: { amount: shippingCents, currency: "usd" },
+            display_name: "Shipping",
+          },
         },
+      ],
+      ...(customerId
+        ? { customer: customerId, customer_update: { shipping: "auto" } }
+        : {}),
+      metadata: {
+        printfulItems: JSON.stringify(printfulItems),
+        artPieceIds: JSON.stringify(artPieceIds),
       },
-    ],
-    ...(customerId
-      ? { customer: customerId, customer_update: { shipping: "auto" } }
-      : {}),
-    metadata: {
-      printfulItems: JSON.stringify(printfulItems),
-      artPieceIds: JSON.stringify(artPieceIds),
-    },
-    success_url: `${origin}/shop?order=success`,
-    cancel_url: `${origin}/shop?order=cancelled`,
-  });
+      success_url: `${origin}/shop?order=success`,
+      cancel_url: `${origin}/shop?order=cancelled`,
+    });
 
-  return NextResponse.json({ url: session.url });
+    return NextResponse.json({ url: session.url });
+  } catch (err) {
+    console.error("Stripe checkout session creation failed:", err);
+    const message = err instanceof Error ? err.message : "Something went wrong.";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }
