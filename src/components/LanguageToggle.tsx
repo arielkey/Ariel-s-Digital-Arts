@@ -31,7 +31,7 @@ export default function LanguageToggle() {
       </button>
 
       {open ? (
-        <div className="absolute end-0 top-full z-50 mt-2 w-36 overflow-hidden rounded-xl border border-sage-200 bg-cream-50 py-1 shadow-lg">
+        <div className="absolute start-0 top-full z-50 mt-2 w-36 overflow-hidden rounded-xl border border-sage-200 bg-cream-50 py-1 shadow-lg md:start-auto md:end-0">
           {LOCALES.map((l) => (
             <button
               key={l.code}
