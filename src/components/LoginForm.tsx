@@ -77,6 +77,10 @@ export default function LoginForm() {
           />
         </label>
 
+        <Link href="/forgot-password" className="-mt-2 self-end text-sm text-link underline hover:text-sage-800">
+          {t("auth.forgotPassword")}
+        </Link>
+
         {error ? <p className="text-sm text-red-600">{error}</p> : null}
 
         <button
