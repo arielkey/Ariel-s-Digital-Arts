@@ -5,6 +5,7 @@ const es: Dictionary = {
     home: "Inicio",
     shop: "Tienda",
     gallery: "Galería",
+    books: "Libros",
     about: "Sobre mí",
     commissions: "Encargos",
     contact: "Contacto",
@@ -30,6 +31,8 @@ const es: Dictionary = {
     viewGallery: "Ver galería →",
     fromShop: "De la tienda",
     shopAll: "Ver toda la tienda →",
+    coloringBooks: "Libros para colorear",
+    viewBooks: "Ver libros →",
   },
   coloringBanner: {
     heading: "Recibe un fondo de pantalla gratis para tu computadora",
@@ -121,6 +124,19 @@ const es: Dictionary = {
       "Piezas de arte fantástico originales y únicas — cada una pintada a mano, no impresa bajo demanda.",
     notLive: "La galería aún no está conectada — mostrando piezas de muestra.",
     empty: "Aún no hay piezas publicadas — vuelve pronto.",
+  },
+  books: {
+    title: "Libros para colorear",
+    description:
+      "Libros para colorear de fantasía oscura para adultos y adolescentes — páginas impresas por un solo lado, hechos para aliviar el estrés y escapar creativamente. Disponibles en Amazon.",
+    epicDragonsTitle: "Libro para colorear Epic Dragons",
+    epicDragonsDesc:
+      "Dragones feroces y majestuosos — desde titanes que escupen fuego hasta guardianes antiguos y místicos — en ilustraciones audaces y detalladas, de elegantes a intensas.",
+    fairyRealmsTitle: "Libro para colorear Fairy Realms",
+    fairyRealmsDesc:
+      "Reinas hada oscuras, bosques encantados y alas brillantes que atrapan la luz de la luna — ilustraciones de fantasía cuidadosamente seleccionadas, desde fluidas y meditativas hasta ricamente detalladas.",
+    details: "Tapa blanda · 50 páginas · 8.5 × 11 pulg. · páginas de un solo lado",
+    viewOnAmazon: "Ver en Amazon",
   },
   artCard: {
     sold: "Vendido",

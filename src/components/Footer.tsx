@@ -70,6 +70,9 @@ export default function Footer() {
             <Link href="/gallery" className="text-mist-100/80 hover:text-mist-50">
               {t("nav.gallery")}
             </Link>
+            <Link href="/books" className="text-mist-100/80 hover:text-mist-50">
+              {t("nav.books")}
+            </Link>
             <Link href="/about" className="text-mist-100/80 hover:text-mist-50">
               {t("nav.about")}
             </Link>

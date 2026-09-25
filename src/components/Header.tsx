@@ -15,6 +15,7 @@ const NAV_LINKS = [
   { href: "/", key: "nav.home" },
   { href: "/shop", key: "nav.shop" },
   { href: "/gallery", key: "nav.gallery" },
+  { href: "/books", key: "nav.books" },
   { href: "/about", key: "nav.about" },
   { href: "/about#commissions", key: "nav.commissions" },
   { href: "/contact", key: "nav.contact" },

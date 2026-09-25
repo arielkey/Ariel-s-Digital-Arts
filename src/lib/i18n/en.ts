@@ -5,6 +5,7 @@ const en: Dictionary = {
     home: "Home",
     shop: "Shop",
     gallery: "Gallery",
+    books: "Books",
     about: "About",
     commissions: "Commissions",
     contact: "Contact",
@@ -30,6 +31,8 @@ const en: Dictionary = {
     viewGallery: "View gallery →",
     fromShop: "From the Shop",
     shopAll: "Shop all →",
+    coloringBooks: "Coloring Books",
+    viewBooks: "View books →",
   },
   coloringBanner: {
     heading: "Get a free desktop wallpaper",
@@ -121,6 +124,19 @@ const en: Dictionary = {
       "Original, one-of-a-kind fantasy art pieces — each painted by hand, not printed on demand.",
     notLive: "Gallery isn't connected yet — showing sample pieces.",
     empty: "No pieces posted yet — check back soon.",
+  },
+  books: {
+    title: "Coloring Books",
+    description:
+      "Dark fantasy coloring books for adults and teens — single-sided pages, made for stress relief and creative escape. Available on Amazon.",
+    epicDragonsTitle: "Epic Dragons Coloring Book",
+    epicDragonsDesc:
+      "Fierce, majestic dragons — from fire-breathing titans to ancient, mystical guardians — in bold, detailed illustrations that range from elegant to intense.",
+    fairyRealmsTitle: "Fairy Realms Coloring Book",
+    fairyRealmsDesc:
+      "Dark fairy queens, enchanted forests, and glowing wings that catch the moonlight — hand-curated fantasy illustrations, from flowing and meditative to richly detailed.",
+    details: "Paperback · 50 pages · 8.5 × 11 in · single-sided pages",
+    viewOnAmazon: "View on Amazon",
   },
   artCard: {
     sold: "Sold",

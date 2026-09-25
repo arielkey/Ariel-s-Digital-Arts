@@ -4,6 +4,8 @@ import SectionHeader from "@/components/SectionHeader";
 import ColoringPageBanner from "@/components/ColoringPageBanner";
 import ProductCard from "@/components/ProductCard";
 import ArtCard from "@/components/ArtCard";
+import BookCard from "@/components/BookCard";
+import { books } from "@/lib/books";
 import { getArtPieces } from "@/lib/gallery";
 import { getPrintfulProducts } from "@/lib/printful";
 import { featuredArt as placeholderArt, featuredProducts as placeholderProducts } from "@/lib/placeholder-data";
@@ -29,6 +31,15 @@ export default async function Home() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
           {featuredArt.map((art) => (
             <ArtCard key={art.id} art={art} />
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+        <SectionHeader titleKey="home.coloringBooks" linkHref="/books" linkKey="home.viewBooks" />
+        <div className="grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">
+          {books.map((book) => (
+            <BookCard key={book.id} book={book} />
           ))}
         </div>
       </section>
