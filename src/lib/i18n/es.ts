@@ -40,6 +40,8 @@ const es: Dictionary = {
       "Únete a la lista y te enviaré un fondo de pantalla gratuito para computadora de mi colección de arte fantástico, además de ser la primera persona en ver piezas nuevas y lanzamientos.",
     spamNote:
       "¿No ves el correo de confirmación en un minuto? Revisa tu carpeta de spam/correo no deseado y marca \"No es spam\" para que llegue a tu bandeja de entrada.",
+    privacyNote: "Al suscribirte, aceptas nuestra {link}.",
+    privacyLinkLabel: "Política de Privacidad",
   },
   footer: {
     tagline: "Arte fantástico original, impresiones y ropa — historias dibujadas a mano, cobrando vida.",
@@ -166,6 +168,8 @@ const es: Dictionary = {
     increaseQuantity: "Aumentar cantidad",
     remove: "Eliminar {title}",
     error: "Algo salió mal.",
+    agreeToTerms: "Acepto los {link}.",
+    agreeToTermsLinkLabel: "Términos de Venta",
   },
   tipJar: {
     button: "Propina",

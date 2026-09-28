@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Minus, Plus, X } from "lucide-react";
 import { useCart } from "./CartContext";
 import PlaceholderArt from "./PlaceholderArt";
@@ -12,6 +13,10 @@ export default function CartDrawer() {
   const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [agreed, setAgreed] = useState(false);
+
+  const agreeTemplate = t("cart.agreeToTerms");
+  const [agreeBefore, agreeAfter] = agreeTemplate.split("{link}");
 
   async function handleCheckout() {
     setLoading(true);
@@ -112,9 +117,24 @@ export default function CartDrawer() {
               <span>${subtotal.toFixed(2)}</span>
             </div>
             {error ? <p className="mb-2 text-sm text-red-600">{error}</p> : null}
+            <label className="mb-3 flex items-start gap-2 text-xs text-foreground/70">
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+                className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer accent-sage-600"
+              />
+              <span>
+                {agreeBefore}
+                <Link href="/terms-of-sale" target="_blank" className="text-link underline hover:text-sage-800">
+                  {t("cart.agreeToTermsLinkLabel")}
+                </Link>
+                {agreeAfter}
+              </span>
+            </label>
             <button
               onClick={handleCheckout}
-              disabled={loading}
+              disabled={loading || !agreed}
               className="w-full rounded-full bg-sage-600 px-4 py-2.5 text-sm font-medium text-mist-50 transition-colors hover:bg-sage-700 disabled:opacity-60 cursor-pointer"
             >
               {loading ? t("cart.redirecting") : t("cart.checkout")}

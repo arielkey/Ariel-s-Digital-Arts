@@ -6,9 +6,10 @@ import Logo from "./Logo";
 import KitEmbedForm from "./KitEmbedForm";
 import { InstagramIcon, TikTokIcon, PinterestIcon } from "./SocialIcons";
 import { useLanguage } from "./LanguageProvider";
+import { legalPages, legalTitle } from "@/lib/legal";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   return (
     <footer className="border-t border-sage-200/60 bg-sage-900 text-mist-100">
@@ -92,6 +93,16 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-mist-100/10 px-4 py-4 text-center text-xs text-mist-100/50 sm:px-6">
+        <nav className="mb-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+          {legalPages.map((page, i) => (
+            <span key={page.slug} className="flex items-center gap-x-3">
+              {i > 0 ? <span aria-hidden="true">·</span> : null}
+              <Link href={page.href} className="hover:text-mist-100/80">
+                {legalTitle(page.doc, locale)}
+              </Link>
+            </span>
+          ))}
+        </nav>
         {t("footer.rights", { year: new Date().getFullYear() })}
       </div>
     </footer>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { useLanguage } from "./LanguageProvider";
 
 const EMBED_SRC = "https://ariel-s-digital-arts.kit.com/f5cc99f86b/index.js";
@@ -22,6 +23,8 @@ const EMBED_UID = "f5cc99f86b";
 export default function KitEmbedForm() {
   const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
+  const privacyTemplate = t("coloringBanner.privacyNote");
+  const [privacyBefore, privacyAfter] = privacyTemplate.split("{link}");
 
   useEffect(() => {
     const container = containerRef.current;
@@ -42,6 +45,13 @@ export default function KitEmbedForm() {
     <div className="w-full min-w-0 max-w-md">
       <div ref={containerRef} />
       <p className="mt-2 text-xs text-mist-100/60">{t("coloringBanner.spamNote")}</p>
+      <p className="mt-1 text-xs text-mist-100/60">
+        {privacyBefore}
+        <Link href="/privacy" className="underline hover:text-mist-100">
+          {t("coloringBanner.privacyLinkLabel")}
+        </Link>
+        {privacyAfter}
+      </p>
     </div>
   );
 }

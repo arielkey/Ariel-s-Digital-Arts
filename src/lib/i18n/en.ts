@@ -40,6 +40,8 @@ const en: Dictionary = {
       "Join the list and I'll send you a free desktop wallpaper from my fantasy art collection, plus first look at new pieces and drops.",
     spamNote:
       "Don't see the confirmation email in a minute? Check your spam/junk folder and mark it \"Not Spam\" so it reaches your inbox.",
+    privacyNote: "By signing up, you agree to our {link}.",
+    privacyLinkLabel: "Privacy Policy",
   },
   footer: {
     tagline: "Original fantasy art, prints, and apparel — hand-drawn stories brought to life.",
@@ -166,6 +168,8 @@ const en: Dictionary = {
     increaseQuantity: "Increase quantity",
     remove: "Remove {title}",
     error: "Something went wrong.",
+    agreeToTerms: "I agree to the {link}.",
+    agreeToTermsLinkLabel: "Terms of Sale",
   },
   tipJar: {
     button: "Tip Jar",
