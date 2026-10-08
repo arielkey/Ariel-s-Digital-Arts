@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import CommissionForm from "./CommissionForm";
+import CommissionExamples from "./CommissionExamples";
 import { useLanguage } from "./LanguageProvider";
 
 export default function AboutPageContent() {
@@ -58,6 +59,10 @@ export default function AboutPageContent() {
         </ul>
 
         <p className="mt-5 text-sm text-foreground/60">{t("about.pricingNote")}</p>
+
+        <div className="mt-8 border-t border-gold-200 pt-8">
+          <CommissionExamples />
+        </div>
 
         <div className="mt-8 border-t border-gold-200 pt-8">
           <CommissionForm />
