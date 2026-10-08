@@ -1,7 +1,6 @@
 import Hero from "@/components/Hero";
 import HomeIntro from "@/components/HomeIntro";
 import SectionHeader from "@/components/SectionHeader";
-import ColoringPageBanner from "@/components/ColoringPageBanner";
 import ProductCard from "@/components/ProductCard";
 import ArtCard from "@/components/ArtCard";
 import BookCard from "@/components/BookCard";
@@ -52,8 +51,6 @@ export default async function Home() {
           ))}
         </div>
       </section>
-
-      <ColoringPageBanner />
     </>
   );
 }

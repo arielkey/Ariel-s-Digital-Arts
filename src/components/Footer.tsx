@@ -85,9 +85,9 @@ export default function Footer() {
 
         <div className="flex w-full max-w-sm flex-col gap-3">
           <span className="font-display text-xs uppercase tracking-widest text-gold-300">
-            {t("footer.joinList")}
+            {t("coloringBanner.heading")}
           </span>
-          <p className="text-sm text-mist-100/70">{t("footer.joinListDesc")}</p>
+          <p className="text-sm text-mist-100/70">{t("coloringBanner.description")}</p>
           <KitEmbedForm />
         </div>
       </div>

@@ -46,8 +46,6 @@ const es: Dictionary = {
   footer: {
     tagline: "Arte fantástico original, impresiones y ropa — historias dibujadas a mano, cobrando vida.",
     explore: "Explorar",
-    joinList: "Únete a la lista",
-    joinListDesc: "Actualizaciones ocasionales sobre piezas nuevas, impresiones y lanzamientos. Sin spam.",
     rights: "© {year} Ariel's Digital Arts. Todos los derechos reservados.",
   },
   about: {

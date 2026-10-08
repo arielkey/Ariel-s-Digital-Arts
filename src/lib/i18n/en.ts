@@ -46,8 +46,6 @@ const en: Dictionary = {
   footer: {
     tagline: "Original fantasy art, prints, and apparel — hand-drawn stories brought to life.",
     explore: "Explore",
-    joinList: "Join the list",
-    joinListDesc: "Occasional updates on new pieces, prints, and drops. No spam.",
     rights: "© {year} Ariel's Digital Arts. All rights reserved.",
   },
   about: {
