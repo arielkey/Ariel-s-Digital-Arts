@@ -83,6 +83,17 @@ const IMAGE_OVERRIDES: Record<number, string> = {
 };
 
 /**
+ * Products shown in the homepage "From the Shop" row, in display order —
+ * chosen so each card shows a different design on a different kind of item.
+ * Keyed by sync_product id; swap ids here to change what the homepage features.
+ */
+export const HOME_FEATURED_PRODUCT_IDS = [
+  468507480, // Mombie Sweatshirt
+  476770227, // Verdant Gaze Jigsaw puzzle
+  468507394, // Cardboard Crack Desk mat
+];
+
+/**
  * Fetches the live Printful store catalog, using each product's first
  * variant as the buyable item. Returns null if Printful isn't configured
  * (missing PRINTFUL_API_KEY) or the request fails, so callers can fall
@@ -109,6 +120,7 @@ export async function getPrintfulProducts(): Promise<ShopProduct[] | null> {
       image: IMAGE_OVERRIDES[detail.sync_product.id] ?? detail.sync_product.thumbnail_url,
       category: guessCategory(detail.sync_product.name),
       printfulVariantId: variant.id,
+      printfulProductId: detail.sync_product.id,
       href: `/shop#${variant.id}`,
     });
   }

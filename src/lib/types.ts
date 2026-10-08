@@ -10,6 +10,8 @@ export interface ShopProduct {
   category: ProductCategory;
   /** Printful sync variant id — the authoritative id used to place fulfillment orders. */
   printfulVariantId?: number;
+  /** Printful sync product id — stable across variants, used to pick products featured on the homepage. */
+  printfulProductId?: number;
   href: string;
 }
 

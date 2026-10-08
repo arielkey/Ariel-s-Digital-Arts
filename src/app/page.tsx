@@ -6,7 +6,8 @@ import ArtCard from "@/components/ArtCard";
 import BookCard from "@/components/BookCard";
 import { books } from "@/lib/books";
 import { getArtPieces } from "@/lib/gallery";
-import { getPrintfulProducts } from "@/lib/printful";
+import { getPrintfulProducts, HOME_FEATURED_PRODUCT_IDS } from "@/lib/printful";
+import type { ShopProduct } from "@/lib/types";
 import { featuredArt as placeholderArt, featuredProducts as placeholderProducts } from "@/lib/placeholder-data";
 
 // Refetch featured art/products periodically instead of only at build
@@ -17,7 +18,12 @@ export const revalidate = 300;
 export default async function Home() {
   const [liveArt, liveProducts] = await Promise.all([getArtPieces(), getPrintfulProducts()]);
   const featuredArt = (liveArt ?? placeholderArt).slice(0, 2);
-  const featuredProducts = (liveProducts ?? placeholderProducts).slice(0, 3);
+  const allProducts = liveProducts ?? placeholderProducts;
+  const picked = HOME_FEATURED_PRODUCT_IDS.map((id) =>
+    allProducts.find((p) => p.printfulProductId === id)
+  ).filter((p): p is ShopProduct => p !== undefined);
+  // If any pick is missing (renamed/removed in Printful, or sample data), fall back to the first items.
+  const featuredProducts = picked.length === HOME_FEATURED_PRODUCT_IDS.length ? picked : allProducts.slice(0, 3);
 
   return (
     <>
