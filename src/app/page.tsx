@@ -27,6 +27,15 @@ export default async function Home() {
       <HomeIntro />
 
       <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+        <SectionHeader titleKey="home.fromShop" linkHref="/shop" linkKey="home.shopAll" />
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <SectionHeader titleKey="home.featuredArt" linkHref="/gallery" linkKey="home.viewGallery" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
           {featuredArt.map((art) => (
@@ -45,15 +54,6 @@ export default async function Home() {
       </section>
 
       <ColoringPageBanner />
-
-      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <SectionHeader titleKey="home.fromShop" linkHref="/shop" linkKey="home.shopAll" />
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </section>
     </>
   );
 }
