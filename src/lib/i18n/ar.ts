@@ -248,6 +248,7 @@ const ar: Dictionary = {
     apparel: "ملابس",
     puzzles: "ألغاز تركيب",
     prints: "مطبوعات",
+    ornaments: "زينة الأعياد",
     mats: "حصائر",
     other: "أخرى",
     empty: "لا توجد عناصر في هذه الفئة بعد.",

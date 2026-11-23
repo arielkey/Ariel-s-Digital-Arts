@@ -27,6 +27,7 @@ export function isPrintfulConfigured() {
 function guessCategory(name: string): ProductCategory {
   const n = name.toLowerCase();
   if (/(puzzle|jigsaw)/.test(n)) return "puzzles";
+  if (/ornament/.test(n)) return "ornaments";
   if (/(shirt|tee|hoodie|sweatshirt|tank|apparel|crewneck)/.test(n)) return "apparel";
   if (/(desk mat|playmat|play mat|mousepad|mouse pad|\bmats?\b)/.test(n)) return "mats";
   if (/(print|poster|canvas|art)/.test(n)) return "prints";
@@ -100,8 +101,19 @@ export const HOME_FEATURED_PRODUCT_IDS = [
  * back to placeholder data.
  */
 export async function getPrintfulProducts(): Promise<ShopProduct[] | null> {
-  const list = await printfulFetch<PrintfulSyncProductSummary[]>("/store/products");
-  if (!list) return null;
+  // Printful returns only 20 products per request by default, so page
+  // through the whole catalog — otherwise the oldest products silently vanish
+  // from the shop once the store grows past 20.
+  const PAGE_SIZE = 100;
+  const list: PrintfulSyncProductSummary[] = [];
+  for (let offset = 0; ; offset += PAGE_SIZE) {
+    const page = await printfulFetch<PrintfulSyncProductSummary[]>(
+      `/store/products?limit=${PAGE_SIZE}&offset=${offset}`
+    );
+    if (!page) return null;
+    list.push(...page);
+    if (page.length < PAGE_SIZE) break;
+  }
 
   const details = await Promise.all(
     list.map((p) => printfulFetch<PrintfulSyncProductDetail>(`/store/products/${p.id}`))

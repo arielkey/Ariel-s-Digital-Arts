@@ -5,7 +5,7 @@ import ProductCard from "./ProductCard";
 import { useLanguage } from "./LanguageProvider";
 import type { ProductCategory, ShopProduct } from "@/lib/types";
 
-const CATEGORY_ORDER: ProductCategory[] = ["apparel", "puzzles", "prints", "mats", "other"];
+const CATEGORY_ORDER: ProductCategory[] = ["apparel", "puzzles", "prints", "mats", "ornaments", "other"];
 
 export default function ShopGrid({ products }: { products: ShopProduct[] }) {
   const { t } = useLanguage();

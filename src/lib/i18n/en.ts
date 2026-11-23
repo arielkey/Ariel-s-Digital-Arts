@@ -252,6 +252,7 @@ const en: Dictionary = {
     puzzles: "Puzzles",
     prints: "Prints",
     mats: "Mats",
+    ornaments: "Ornaments",
     other: "Other",
     empty: "No items in this category yet.",
   },

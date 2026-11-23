@@ -251,6 +251,7 @@ const es: Dictionary = {
     apparel: "Ropa",
     puzzles: "Rompecabezas",
     prints: "Impresiones",
+    ornaments: "Adornos navideños",
     mats: "Alfombrillas",
     other: "Otros",
     empty: "Aún no hay artículos en esta categoría.",
