@@ -3,7 +3,7 @@ import type { Dictionary } from "./en";
 const ar: Dictionary = {
   nav: {
     shop: "المتجر",
-    crimsonValkyrie: "Crimson Valkyrie",
+    crimsonValkyrie: "تعديلات ورموز MTG",
     shopMerch: "الملابس والمطبوعات",
     shopArt: "الفن الأصلي",
     shopBooks: "كتب التلوين",
@@ -87,7 +87,9 @@ const ar: Dictionary = {
   crimsonValkyrie: {
     sister: "علامة شقيقة لـ Ariel's Digital Arts",
     tagline: "كل ضربة فرشاة تحكي قصة",
-    descriptor: "تعديلات بطاقات MTG مرسومة يدويًا، ورموز مخصصة، وفن فانتازيا أصلي.",
+    descriptor: "تعديلات بطاقات MTG ورموز مخصصة، مرسومة يدويًا.",
+    explain:
+      "تعديل البطاقة (Alter) هو بطاقة Magic: The Gathering يُعاد رسم صورتها يدويًا لتصبح شيئًا جديدًا. أما الرموز (Tokens) فهي قطع لعب مخصصة تمثّل المخلوقات والتأثيرات. كما أقبل طلبات الفن الخيالي الأصلي.",
     ctaRequest: "اطلبي عملًا مخصصًا",
     ctaWork: "شاهدي الأعمال",
     bannerHeading: "تعديلات بطاقات MTG مرسومة يدويًا ورموز مخصصة",

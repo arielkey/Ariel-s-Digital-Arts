@@ -3,7 +3,7 @@ import type { Dictionary } from "./en";
 const es: Dictionary = {
   nav: {
     shop: "Tienda",
-    crimsonValkyrie: "Crimson Valkyrie",
+    crimsonValkyrie: "Alters y fichas MTG",
     shopMerch: "Ropa e impresiones",
     shopArt: "Arte original",
     shopBooks: "Libros para colorear",
@@ -87,7 +87,9 @@ const es: Dictionary = {
   crimsonValkyrie: {
     sister: "Una marca hermana de Ariel's Digital Arts",
     tagline: "Cada pincelada cuenta una historia",
-    descriptor: "Alters de cartas MTG pintados a mano, fichas personalizadas y arte de fantasía original.",
+    descriptor: "Alters de cartas MTG y fichas personalizadas, pintados a mano.",
+    explain:
+      "Un alter es una carta de Magic: The Gathering con su ilustración repintada a mano para convertirla en algo nuevo. Las fichas son piezas de juego personalizadas que representan criaturas y efectos. También acepto encargos de arte de fantasía original.",
     ctaRequest: "Solicitar un encargo",
     ctaWork: "Ver los trabajos",
     bannerHeading: "Alters de MTG pintados a mano y fichas personalizadas",

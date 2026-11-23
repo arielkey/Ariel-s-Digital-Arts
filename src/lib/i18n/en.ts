@@ -3,7 +3,7 @@ export type Dictionary = Record<string, Record<string, string>>;
 const en: Dictionary = {
   nav: {
     shop: "Shop",
-    crimsonValkyrie: "Crimson Valkyrie",
+    crimsonValkyrie: "MTG Alters & Tokens",
     shopMerch: "Merch & prints",
     shopArt: "Original art",
     shopBooks: "Coloring books",
@@ -87,7 +87,9 @@ const en: Dictionary = {
   crimsonValkyrie: {
     sister: "A sister brand of Ariel's Digital Arts",
     tagline: "Every Stroke Tells a Story",
-    descriptor: "Hand-painted MTG card alters, custom tokens, and original fantasy art.",
+    descriptor: "Custom MTG card alters and tokens, painted by hand.",
+    explain:
+      "An alter is a Magic: The Gathering card with its artwork hand-painted into something new. Tokens are custom game pieces that stand in for creatures and effects. I also take original fantasy art commissions.",
     ctaRequest: "Request a commission",
     ctaWork: "See the work",
     bannerHeading: "Hand-Painted MTG Alters & Custom Tokens",

@@ -29,8 +29,11 @@ export default function CrimsonValkyriePageContent() {
               <span className="sr-only">The Crimson Valkyrie — </span>
               {t("crimsonValkyrie.tagline")}
             </h1>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-foreground/80">
+            <p className="mt-5 max-w-md font-display text-xl leading-snug text-foreground">
               {t("crimsonValkyrie.descriptor")}
+            </p>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-foreground/70">
+              {t("crimsonValkyrie.explain")}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
