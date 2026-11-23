@@ -2,9 +2,11 @@ import type { Dictionary } from "./en";
 
 const ar: Dictionary = {
   nav: {
-    home: "الرئيسية",
     shop: "المتجر",
     crimsonValkyrie: "Crimson Valkyrie",
+    shopMerch: "الملابس والمطبوعات",
+    shopArt: "الفن الأصلي",
+    shopBooks: "كتب التلوين",
     gallery: "المعرض",
     books: "الكتب",
     about: "عني",

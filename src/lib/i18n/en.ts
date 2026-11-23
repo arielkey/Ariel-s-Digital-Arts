@@ -2,9 +2,11 @@ export type Dictionary = Record<string, Record<string, string>>;
 
 const en: Dictionary = {
   nav: {
-    home: "Home",
     shop: "Shop",
     crimsonValkyrie: "Crimson Valkyrie",
+    shopMerch: "Merch & prints",
+    shopArt: "Original art",
+    shopBooks: "Coloring books",
     gallery: "Gallery",
     books: "Books",
     about: "About",

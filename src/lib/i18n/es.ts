@@ -2,9 +2,11 @@ import type { Dictionary } from "./en";
 
 const es: Dictionary = {
   nav: {
-    home: "Inicio",
     shop: "Tienda",
     crimsonValkyrie: "Crimson Valkyrie",
+    shopMerch: "Ropa e impresiones",
+    shopArt: "Arte original",
+    shopBooks: "Libros para colorear",
     gallery: "Galería",
     books: "Libros",
     about: "Sobre mí",
