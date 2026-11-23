@@ -3,7 +3,7 @@ export type Dictionary = Record<string, Record<string, string>>;
 const en: Dictionary = {
   nav: {
     shop: "Shop",
-    crimsonValkyrie: "MTG Alters & Tokens",
+    crimsonValkyrie: "Card Alters & Tokens",
     shopMerch: "Merch & prints",
     shopArt: "Original art",
     shopBooks: "Coloring books",

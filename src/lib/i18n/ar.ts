@@ -3,7 +3,7 @@ import type { Dictionary } from "./en";
 const ar: Dictionary = {
   nav: {
     shop: "المتجر",
-    crimsonValkyrie: "تعديلات ورموز MTG",
+    crimsonValkyrie: "تعديلات البطاقات والرموز",
     shopMerch: "الملابس والمطبوعات",
     shopArt: "الفن الأصلي",
     shopBooks: "كتب التلوين",

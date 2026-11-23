@@ -3,7 +3,7 @@ import type { Dictionary } from "./en";
 const es: Dictionary = {
   nav: {
     shop: "Tienda",
-    crimsonValkyrie: "Alters y fichas MTG",
+    crimsonValkyrie: "Alters de cartas y fichas",
     shopMerch: "Ropa e impresiones",
     shopArt: "Arte original",
     shopBooks: "Libros para colorear",
