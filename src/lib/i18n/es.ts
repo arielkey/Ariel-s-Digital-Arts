@@ -117,7 +117,7 @@ const es: Dictionary = {
     step2Body: "Te respondo con el precio y un plazo estimado antes de comenzar cualquier trabajo.",
     step3Title: "Lo pinto",
     step3Body:
-      "En los alters de cartas, tú aportas la carta. Cuando el precio está confirmado y tengo tu carta, me pongo a pintar.",
+      "En los alters de cartas, tú aportas la carta. Cuando el precio está confirmado y tengo tu carta, me pongo a pintar. El plazo de entrega es de hasta dos semanas.",
     requestHeading: "Solicitar un encargo",
     requestIntro:
       "Cuéntame sobre tu carta o idea. No se cobra nada al enviar esto — primero te responderé con un precio.",

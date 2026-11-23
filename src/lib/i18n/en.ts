@@ -117,7 +117,7 @@ const en: Dictionary = {
     step2Body: "I reply with your price and an estimated timeline before any work begins.",
     step3Title: "I paint it",
     step3Body:
-      "For card alters, you supply the card. Once the price is confirmed and I have your card, I get painting.",
+      "For card alters, you supply the card. Once the price is confirmed and I have your card, I get painting. Turnaround is up to two weeks.",
     requestHeading: "Request a commission",
     requestIntro:
       "Tell me about your card or idea. Nothing is charged when you send this — I'll reply with a price first.",
