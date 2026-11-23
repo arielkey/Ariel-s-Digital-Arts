@@ -22,6 +22,9 @@ export default function Footer() {
             </span>
           </div>
           <p className="text-sm text-mist-100/70">{t("footer.tagline")}</p>
+          <Link href="/crimson-valkyrie" className="text-sm text-gold-300 transition-colors hover:text-gold-200">
+            {t("footer.homeOf")}
+          </Link>
           <a
             href="mailto:executiveorganizeak@gmail.com"
             className="flex items-center gap-2 text-sm text-mist-100/70 transition-colors hover:text-gold-300"

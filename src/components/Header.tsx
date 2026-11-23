@@ -13,6 +13,7 @@ import { useLanguage } from "./LanguageProvider";
 
 const NAV_LINKS = [
   { href: "/", key: "nav.home" },
+  { href: "/crimson-valkyrie", key: "nav.crimsonValkyrie" },
   { href: "/shop", key: "nav.shop" },
   { href: "/gallery", key: "nav.gallery" },
   { href: "/books", key: "nav.books" },
@@ -39,7 +40,7 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-4 whitespace-nowrap xl:flex">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -52,7 +53,7 @@ export default function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-3 sm:gap-4">
-          <div className="hidden items-center gap-4 md:flex">
+          <div className="hidden items-center gap-4 xl:flex">
             <LanguageToggle />
             <ThemeToggle />
             <AccountLink />
@@ -60,7 +61,7 @@ export default function Header() {
           </div>
           <CartButton />
           <button
-            className="text-sage-800 md:hidden cursor-pointer"
+            className="text-sage-800 xl:hidden cursor-pointer"
             aria-label={t("common.toggleMenu")}
             onClick={() => setMenuOpen((v) => !v)}
           >
@@ -70,7 +71,7 @@ export default function Header() {
       </div>
 
       {menuOpen ? (
-        <nav className="flex flex-col gap-1 border-t border-sage-200/60 bg-cream-50 px-4 py-3 md:hidden">
+        <nav className="flex flex-col gap-1 border-t border-sage-200/60 bg-cream-50 px-4 py-3 xl:hidden">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}

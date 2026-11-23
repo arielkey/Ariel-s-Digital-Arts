@@ -96,7 +96,7 @@ export default function CommissionExamples() {
           type="button"
           onClick={close}
           aria-label={t("commissionExamples.close")}
-          className="absolute end-4 top-4 cursor-pointer rounded-full bg-cream-50/90 p-2 text-ink-900 transition-colors hover:bg-cream-50"
+          className="absolute end-4 top-4 cursor-pointer rounded-full bg-mist-50/90 p-2 text-ink-900 transition-colors hover:bg-mist-50"
         >
           <X className="h-5 w-5" />
         </button>
@@ -108,7 +108,7 @@ export default function CommissionExamples() {
             step(-1);
           }}
           aria-label={t("commissionExamples.previous")}
-          className="absolute start-2 top-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-cream-50/90 p-2 text-ink-900 transition-colors hover:bg-cream-50 sm:start-4"
+          className="absolute start-2 top-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-mist-50/90 p-2 text-ink-900 transition-colors hover:bg-mist-50 sm:start-4"
         >
           <ChevronLeft className="h-6 w-6 rtl:rotate-180" />
         </button>
@@ -119,7 +119,7 @@ export default function CommissionExamples() {
             step(1);
           }}
           aria-label={t("commissionExamples.next")}
-          className="absolute end-2 top-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-cream-50/90 p-2 text-ink-900 transition-colors hover:bg-cream-50 sm:end-4"
+          className="absolute end-2 top-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-mist-50/90 p-2 text-ink-900 transition-colors hover:bg-mist-50 sm:end-4"
         >
           <ChevronRight className="h-6 w-6 rtl:rotate-180" />
         </button>

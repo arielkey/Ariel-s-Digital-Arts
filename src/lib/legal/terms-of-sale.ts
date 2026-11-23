@@ -4,7 +4,7 @@ const termsOfSale: LegalDocByLocale = {
   en: {
     title: "Terms of Sale & Refund Policy",
     effectiveDateLabel: "Effective date:",
-    effectiveDate: "September 28, 2026",
+    effectiveDate: "November 23, 2026",
     intro:
       "These Terms of Sale apply to every purchase from arielsdigitalarts.com, operated by A Key Solutions Group LLC, doing business as Ariel's Digital Arts. By placing an order, you agree to them.",
     sections: [
@@ -125,7 +125,21 @@ const termsOfSale: LegalDocByLocale = {
         ],
       },
       {
-        heading: "10. Contact",
+        heading: "10. Custom commissions (card alters, tokens, and original art)",
+        blocks: [
+          { type: "p", text: "Custom work is priced individually. We confirm the final price, payment terms (including any deposit), and an estimated timeline with you before any work begins." },
+          {
+            type: "ul",
+            items: [
+              "For card alters, you supply the card. We are not responsible for the value or condition of cards you send us, so we recommend tracked, insured shipping.",
+              "Custom work is made specifically for you, so the 30-day return policy for prints and original artwork does not apply to commissions.",
+              "Once painting has started, a commission is non-refundable.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "11. Contact",
         blocks: [{ type: "p", text: "Email executiveorganizeak@gmail.com with questions about any order." }],
       },
     ],
@@ -133,7 +147,7 @@ const termsOfSale: LegalDocByLocale = {
   es: {
     title: "Términos de Venta y Política de Reembolsos",
     effectiveDateLabel: "Fecha de entrada en vigor:",
-    effectiveDate: "28 de septiembre de 2026",
+    effectiveDate: "23 de noviembre de 2026",
     intro:
       "Estos Términos de Venta aplican a toda compra realizada en arielsdigitalarts.com, operado por A Key Solutions Group LLC, que opera bajo el nombre comercial Ariel's Digital Arts. Al realizar un pedido, los aceptas.",
     sections: [
@@ -257,7 +271,21 @@ const termsOfSale: LegalDocByLocale = {
         ],
       },
       {
-        heading: "10. Contacto",
+        heading: "10. Encargos personalizados (alters de cartas, fichas y arte original)",
+        blocks: [
+          { type: "p", text: "Los trabajos personalizados se cotizan individualmente. Confirmamos contigo el precio final, las condiciones de pago (incluido cualquier depósito) y un plazo estimado antes de comenzar cualquier trabajo." },
+          {
+            type: "ul",
+            items: [
+              "En los alters de cartas, tú aportas la carta. No somos responsables del valor ni del estado de las cartas que nos envíes, por lo que recomendamos un envío con seguimiento y seguro.",
+              "Los trabajos personalizados se hacen específicamente para ti, por lo que la política de devoluciones de 30 días para impresiones y obras originales no aplica a los encargos.",
+              "Una vez que comienza la pintura, un encargo no es reembolsable.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "11. Contacto",
         blocks: [
           { type: "p", text: "Escribe a executiveorganizeak@gmail.com con preguntas sobre cualquier pedido." },
         ],
@@ -267,7 +295,7 @@ const termsOfSale: LegalDocByLocale = {
   ar: {
     title: "شروط البيع وسياسة الاسترجاع",
     effectiveDateLabel: "تاريخ السريان:",
-    effectiveDate: "28 سبتمبر 2026",
+    effectiveDate: "23 نوفمبر 2026",
     intro:
       "تنطبق شروط البيع هذه على كل عملية شراء من موقع arielsdigitalarts.com، الذي تديره شركة A Key Solutions Group LLC، العاملة تحت الاسم التجاري Ariel's Digital Arts. بإتمام الطلب، فإنك توافق عليها.",
     sections: [
@@ -391,7 +419,21 @@ const termsOfSale: LegalDocByLocale = {
         ],
       },
       {
-        heading: "١٠. التواصل",
+        heading: "١٠. الأعمال المخصصة (تعديلات البطاقات والرموز والفن الأصلي)",
+        blocks: [
+          { type: "p", text: "تُسعَّر الأعمال المخصصة بشكل فردي. نؤكد معك السعر النهائي وشروط الدفع (بما في ذلك أي دفعة مقدمة) وجدولًا زمنيًا تقديريًا قبل بدء أي عمل." },
+          {
+            type: "ul",
+            items: [
+              "في تعديلات البطاقات، توفّر أنت البطاقة. نحن غير مسؤولين عن قيمة البطاقات التي ترسلها إلينا أو حالتها، لذا ننصح باستخدام شحن مع تتبع وتأمين.",
+              "تُصنع الأعمال المخصصة خصيصًا لك، لذا لا تنطبق سياسة الإرجاع خلال 30 يومًا الخاصة بالمطبوعات والأعمال الفنية الأصلية على الأعمال المخصصة.",
+              "بمجرد بدء الرسم، لا يمكن استرداد قيمة العمل المخصص.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "١١. التواصل",
         blocks: [{ type: "p", text: "راسلنا على executiveorganizeak@gmail.com لأي استفسار عن طلبك." }],
       },
     ],

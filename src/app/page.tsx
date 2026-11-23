@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import HomeIntro from "@/components/HomeIntro";
+import CrimsonValkyrieBanner from "@/components/CrimsonValkyrieBanner";
 import SectionHeader from "@/components/SectionHeader";
 import ProductCard from "@/components/ProductCard";
 import ArtCard from "@/components/ArtCard";
@@ -28,6 +29,8 @@ export default async function Home() {
   return (
     <>
       <Hero />
+
+      <CrimsonValkyrieBanner />
 
       <HomeIntro />
 

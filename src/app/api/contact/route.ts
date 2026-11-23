@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "Ariel's Digital Arts <onboarding@resend.dev>",
+      from: `${reason?.startsWith("Crimson Valkyrie") ? "The Crimson Valkyrie" : "Ariel's Digital Arts"} <onboarding@resend.dev>`,
       to: [toEmail],
       reply_to: email,
       subject: `New message from ${name}${reason ? ` — ${reason}` : ""}`,

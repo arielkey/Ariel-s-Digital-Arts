@@ -24,6 +24,12 @@ export default function AboutPageContent() {
 
       <div className="space-y-6 text-base leading-relaxed text-foreground/80">
         <p>{t("about.p3")}</p>
+        <p>
+          {t("about.crimsonLine")}{" "}
+          <Link href="/crimson-valkyrie" className="text-link underline hover:text-sage-800">
+            {t("about.crimsonLink")}
+          </Link>
+        </p>
       </div>
 
       <div className="mt-12 flex flex-wrap gap-4">
