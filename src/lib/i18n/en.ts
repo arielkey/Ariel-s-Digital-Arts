@@ -103,7 +103,7 @@ const en: Dictionary = {
     customDesc: "Painted to your idea.",
     partialName: "Partial card alters",
     partialPrice: "From $35",
-    partialDesc: "Part of your card's art painted over or extended.",
+    partialDesc: "Small changes or small additions to your card.",
     fullName: "Full-art card alters",
     fullPrice: "$120–$150+",
     fullDesc: "Your card's artwork fully repainted.",
